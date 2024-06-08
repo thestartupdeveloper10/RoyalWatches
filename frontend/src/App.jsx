@@ -1,13 +1,18 @@
 import './App.css'
+import Collections from './component/Collections'
+import Hero from './component/Hero'
+import Hero_Products from './component/Hero_Products'
+import NavBar from './component/NavBar'
 
 function App() {
 
 
   return (
    <div>
-    <h1 className="text-3xl text-blue-500 font-bold underline">
-      Hello world!
-    </h1>
+    <NavBar/>
+    <Hero/>
+    <Collections/>
+    <Hero_Products/>
    </div>
   )
 }
