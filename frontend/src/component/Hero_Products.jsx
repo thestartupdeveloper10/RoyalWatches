@@ -11,7 +11,7 @@ import heroDmax from '../assets/imgs/dmax.png'
 const Hero_Products = () => {
     return (
         <div>
-            <div className="mt-20">
+            <div className="md:mt-20 mt-8">
                 <div className="flex justify-start">
                     <h1 className="uppercase font-bold text-xl">
                         Watch & Jewellery offers

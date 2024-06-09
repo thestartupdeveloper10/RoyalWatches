@@ -3,7 +3,7 @@ import another from '../assets/imgs/another.jpg'
 const Gift_Card = () => {
     return (
         <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 w-full mt-20 rounded-lg bg-[#f7f8f2]">
+            <div className="grid grid-cols-1 md:grid-cols-2 w-full md:mt-20 mt-8 rounded-lg bg-[#f7f8f2]">
                 <div>
                     <img src={another} alt="" className=" rounded-lg
                      md:rounded-l-lg h-full object-cover" />

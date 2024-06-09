@@ -13,12 +13,12 @@ import collection2 from '../assets/imgs/collection2.jpg'
 
 const Collections = () => {
     return ( 
-        <div className="mt-20">
+        <div className="md:mt-20 mt-8">
             <Banner/>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mt-20">
                 <Card>
                 <div className="mb-4">
-                    <img src={collection1} alt="" className="rounded-lg object-cover w-full h-full" />
+                    <img src={collection1} alt="" className="rounded-t-lg object-cover w-full h-full" />
                 </div>
                 <CardTitle className='mb-3'>News in Jewelary</CardTitle>
                 <CardContent>
@@ -30,7 +30,7 @@ const Collections = () => {
                 </Card>
                 <Card>
                 <div className="mb-4">
-                    <img src={collection2} alt="" className="rounded-lg object-cover w-full h-full" />
+                    <img src={collection2} alt="" className="rounded-t-lg object-cover w-full h-full" />
                 </div>
                 <CardTitle className='mb-3'>News in Watches</CardTitle>
                 <CardContent>
