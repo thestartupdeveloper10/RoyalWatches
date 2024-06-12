@@ -1,4 +1,11 @@
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import LoginIcon from '@mui/icons-material/Login';
 import { Button } from "@/components/ui/button";
+import { Link } from 'react-router-dom';
+
+
+
 const NavBar = () => {
     return ( 
         <div>
@@ -7,11 +14,12 @@ const NavBar = () => {
                     <Button>Men</Button>
                     <Button>Women</Button>
                 </div>
-                <div><h1 className="text-2xl font-bold ">RoyalWatches</h1></div>
+                <div><Link to="/" className="text-2xl font-bold ">RoyalWatches</Link></div>
                 <div className="hidden md:flex justify-end gap-2 items-center w-full">
-                    <Button>F</Button>
-                    <Button>C</Button>
-                    <Button>D</Button>
+                    
+                    <Link><Button><LoginIcon/></Button></Link>
+                    <Link><Button><FavoriteBorderIcon/></Button></Link>
+                    <Link to="/cart"><Button><LocalMallIcon/></Button></Link>   
                 </div>
             </div>
         </div>

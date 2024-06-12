@@ -1,10 +1,15 @@
 import { Add, Remove } from "@mui/icons-material";
 
+
 import heroImg from "../assets/imgs/rolex.png";
+import heroDmax from '../assets/imgs/dmax.png'
+import NavBar from "./NavBar";
 
 const Cart = () => {
   return (
-    <div className="py-8">
+    <>
+    <NavBar/>
+     <div className="md:py-16 py-6">
       <h1 className="text-3xl font-light text-center mb-8">YOUR BAG</h1>
       <div className="flex justify-between items-center mb-8">
         <button className="px-4 py-2 font-semibold">CONTINUE SHOPPING</button>
@@ -16,7 +21,7 @@ const Cart = () => {
             Your Wishlist (0)
           </span>
         </div>
-        <button className="px-4 py-2 font-semibold bg-black text-white">
+        <button className="px-4 py-2 rounded-md font-semibold bg-black text-white">
           CHECKOUT NOW
         </button>
       </div>
@@ -26,17 +31,17 @@ const Cart = () => {
             <div className="flex">
               <img src={heroImg} alt="Product" className="w-32 h-32 object-cover" />
               <div className="ml-4">
-                <p className="font-semibold text:sm md:text-base">Product: JESSIE THUNDER SHOES</p>
+                <p className="font-semibold text:sm md:text-base">JESSIE THUNDER SHOES</p>
                 <p className="text-sm">ID: 93813718293</p>
                 <div className="w-4 h-4 rounded-full bg-black mt-2"></div>
-                <p className="mt-2">Size: 37.5</p>
+                <p className="mt-2">Size: M</p>
               </div>
             </div>
             <div className="flex flex-col items-center">
               <div className="flex items-center mb-2">
-                <Add className="w-5 h-5 cursor-pointer" />
+                <Add className="w-5 h-5 bg-gray-400 rounded-full cursor-pointer" />
                 <span className="mx-2">2</span>
-                <Remove className="w-5 h-5 cursor-pointer" />
+                <Remove className="w-5 h-5 bg-gray-400 rounded-full cursor-pointer" />
               </div>
               <span className="text-xl font-light">$ 30</span>
             </div>
@@ -44,9 +49,9 @@ const Cart = () => {
           <hr className="border-gray-300 mb-4" />
           <div className="flex justify-between">
             <div className="flex">
-              <img src={heroImg} alt="Product" className="w-32 h-32 object-cover" />
+              <img src={heroDmax} alt="Product" className="w-32 h-32 object-cover " />
               <div className="ml-4">
-                <p className="font-semibold">Product: HAKURA T-SHIRT</p>
+                <p className="font-semibold">HAKURA T-SHIRT</p>
                 <p className="text-sm">ID: 93813718293</p>
                 <div className="w-4 h-4 rounded-full bg-gray-500 mt-2"></div>
                 <p className="mt-2">Size: M</p>
@@ -54,9 +59,9 @@ const Cart = () => {
             </div>
             <div className="flex flex-col items-center">
               <div className="flex items-center mb-2">
-                <Add className="w-5 h-5 cursor-pointer" />
+                <Add className="w-5 h-5 bg-gray-400 rounded-full cursor-pointer" />
                 <span className="mx-2">1</span>
-                <Remove className="w-5 h-5 cursor-pointer" />
+                <Remove className="w-5 h-5 bg-gray-400 rounded-full cursor-pointer" />
               </div>
               <span className="text-xl font-light">$ 20</span>
             </div>
@@ -86,6 +91,8 @@ const Cart = () => {
         </div>
       </div>
     </div>
+    </>
+   
   );
 };
 

@@ -4,6 +4,7 @@ import {
     CardFooter,
   } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
+import { Link } from 'react-router-dom';
 
 import heroImg from '../assets/imgs/rolex.png'
 import heroDmax from '../assets/imgs/dmax.png'
@@ -91,7 +92,10 @@ const Hero_Products = () => {
                
                 </div>
                 <div className="flex justify-start mt-10">
+                <Link to="/products">
                 <Button className='md:px-12 px-6'>Show All Offers</Button> 
+                </Link>
+                
                 </div>
             </div>
         </div>

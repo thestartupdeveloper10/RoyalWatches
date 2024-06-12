@@ -6,10 +6,23 @@ import {
     CarouselPrevious,
   } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button";
+
+import Hero_Products from './Hero_Products'
+import Gift_Card from './Gift_Card'
+import Collections from './Collections'
+import Discover_Front from './Discover_Front'
+import Explore_Front from './Explore_Front'
+import Blog from './Blog'
+import NavBar from './NavBar'
+import { Link } from 'react-router-dom';
+
+
 import heroImg from '../assets/imgs/rolex.png'
 import heroDmax from '../assets/imgs/dmax.png'
 const Hero = () => {
     return ( 
+        <>
+        <NavBar/>
         <div className="md:mx-8 mx-6 mt-10">
             <Carousel>
             <CarouselContent>
@@ -23,7 +36,9 @@ const Hero = () => {
                             </div>
                             <div className="md:flex lg:flex-row md:gap-2 gap-2 flex flex-col">
                                 <Button className='lg:px-12'>Explore</Button>
+                                <Link to="/product">
                                 <Button variant="outline" className='lg:px-12'>Buy Now</Button>
+                                </Link>   
                             </div>
                         </div>
                         </div>
@@ -68,7 +83,18 @@ const Hero = () => {
             <CarouselPrevious />
             <CarouselNext />
             </Carousel>
+
+            <Collections/>
+        <Hero_Products/>
+        <Discover_Front/>
+        <Gift_Card/>
+        <Explore_Front/>
+        <Hero_Products/>
+        <Blog/>
         </div>
+        </>
+     
+        
      );
 }
  

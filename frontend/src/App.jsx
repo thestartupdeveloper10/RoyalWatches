@@ -1,34 +1,30 @@
+import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 import './App.css'
-import Blog from './component/Blog'
 import Cart from './component/Cart'
-import Collections from './component/Collections'
-import Discover_Front from './component/Discover_Front'
-import Explore_Front from './component/Explore_Front'
 import Footer from './component/Footer'
-import Gift_Card from './component/Gift_Card'
 import Hero from './component/Hero'
-import Hero_Products from './component/Hero_Products'
-import NavBar from './component/NavBar'
 import Product from './component/Product'
+import Product_List from './component/Product_List'
 
 function App() {
 
 
   return (
-   <div>
-    <NavBar/>
-    <Hero/>
-    <Collections/>
-    <Hero_Products/>
-    <Discover_Front/>
-    <Gift_Card/>
-    <Explore_Front/>
-    <Hero_Products/>
-    <Blog/>
-    <Product/>
-    <Cart/>
-    <Footer/>
-   </div>
+    <>
+      <Router>
+
+          <Routes>
+            <Route path='/' element={<Hero/>}></Route>
+            <Route path='/products' element={<Product_List/>}></Route>
+            <Route path='/product' element={<Product/>}></Route>
+            <Route path='/cart' element={<Cart/>}></Route>
+          </Routes>
+      </Router>
+      <div>
+      <Footer/>
+</div>
+    </>
+  
   )
 }
 
