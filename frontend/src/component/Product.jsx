@@ -6,7 +6,7 @@ const Product = () => {
   return (
     <>
     <NavBar/>
-    <div className="py-10">
+    <div className="py-10 mt-10">
       <div className="flex flex-col md:flex-row">
         <div className="md:w-1/2">
           <img src={heroImg} alt="Product" className="w-full h-96 object-contain" />

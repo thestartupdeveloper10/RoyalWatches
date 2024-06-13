@@ -7,7 +7,7 @@ const Product_List = () => {
   return (
     <div>
         <NavBar/>
-      <div className='mt-10'>
+      <div className='mt-16'>
         <div className="flex flex-col w-full justify-center items-center gap-3 lg:gap-6 lg:mb-10 mb-8">
           <h1 className="font-lightbold md:text-xl text-lg uppercase">Royal watches</h1>
           <h1 className="font-extrabold lg:text-[56px] md:text-[36px] text-2xl">Royalwatches Men&apos;s watches</h1>

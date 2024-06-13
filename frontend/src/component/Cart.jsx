@@ -9,7 +9,7 @@ const Cart = () => {
   return (
     <>
     <NavBar/>
-     <div className="md:py-16 py-6">
+     <div className="md:py-16 py-6 mt-10">
       <h1 className="text-3xl font-light text-center mb-8">YOUR BAG</h1>
       <div className="flex justify-between items-center mb-8">
         <button className="px-4 py-2 font-semibold">CONTINUE SHOPPING</button>

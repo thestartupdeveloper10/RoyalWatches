@@ -23,7 +23,7 @@ const Hero = () => {
     return ( 
         <>
         <NavBar/>
-        <div className="md:mx-8 mx-6 mt-10">
+        <div className="md:mx-8 mx-6 mt-16">
             <Carousel>
             <CarouselContent>
                 <CarouselItem>
