@@ -1,6 +1,7 @@
 import { Add, Remove } from "@mui/icons-material";
 import heroImg from "../assets/imgs/rolex.png";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const Product = () => {
   return (
@@ -54,6 +55,7 @@ const Product = () => {
         </div>
       </div>
     </div>
+    <Footer/>
     </>
   );
 };

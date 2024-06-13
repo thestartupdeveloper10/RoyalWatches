@@ -1,7 +1,6 @@
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 import './App.css'
 import Cart from './component/Cart'
-import Footer from './component/Footer'
 import Hero from './component/Hero'
 import Product from './component/Product'
 import Product_List from './component/Product_List'
@@ -27,9 +26,6 @@ function App() {
             <Route path='/signup' element={<SignUp/>}></Route>
           </Routes>
       </Router>
-      <div>
-      <Footer/>
-</div>
     </>
   
   )

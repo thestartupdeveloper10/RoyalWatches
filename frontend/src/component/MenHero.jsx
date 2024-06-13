@@ -1,6 +1,7 @@
 import heroImg from "../assets/imgs/rolex.png";
 import heroDmax from '../assets/imgs/dmax.png'
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 const MenHero = () => {
     return ( 
         <>
@@ -111,6 +112,7 @@ const MenHero = () => {
         </form>
       </div>
        </div>
+       <Footer/>
         </>
      );
 }

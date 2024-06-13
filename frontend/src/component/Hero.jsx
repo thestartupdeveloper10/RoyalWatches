@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 
 import heroImg from '../assets/imgs/rolex.png'
 import heroDmax from '../assets/imgs/dmax.png'
+import Footer from "./Footer";
 const Hero = () => {
     return ( 
         <>
@@ -92,6 +93,7 @@ const Hero = () => {
         <Hero_Products/>
         <Blog/>
         </div>
+        <Footer/>
         </>
      
         

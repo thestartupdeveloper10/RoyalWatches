@@ -9,7 +9,7 @@ const SignUp = () => {
                <form action="#">
                     <h2>Sign Up</h2>
                     <div className="input-group">
-                         <input type="text" required/>
+                         <input type="text" className="w-auto" required/>
                          <label>Username</label>
                     </div>
                     <div className="input-group">
