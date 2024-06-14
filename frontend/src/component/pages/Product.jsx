@@ -1,7 +1,8 @@
 import { Add, Remove } from "@mui/icons-material";
-import heroImg from "../assets/imgs/rolex.png";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import NavBar from "../NavBar";
+import Footer from "../Footer";
+
+import heroImg from '../../assets/imgs/rolex.png'
 
 const Product = () => {
   return (

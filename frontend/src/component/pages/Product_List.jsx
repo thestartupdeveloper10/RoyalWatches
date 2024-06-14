@@ -1,8 +1,10 @@
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import heroImg from '../assets/imgs/rolex.png'
-import heroDmax from '../assets/imgs/dmax.png'
-import NavBar from './NavBar';
-import Footer from './Footer';
+
+import NavBar from '../NavBar';
+import Footer from '../Footer';
+
+import heroImg from '../../assets/imgs/rolex.png'
+import heroDmax from '../../assets/imgs/dmax.png'
 
 const Product_List = () => {
   return (

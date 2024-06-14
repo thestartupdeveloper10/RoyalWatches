@@ -1,12 +1,12 @@
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 import './App.css'
-import Cart from './component/Cart'
-import Hero from './component/Hero'
-import Product from './component/Product'
-import Product_List from './component/Product_List'
-import MenHero from './component/MenHero'
-import Login from './component/Login'
-import SignUp from './component/SignUp'
+import Cart from './component/pages/Cart'
+import Hero from './component/pages/Hero'
+import Product from './component/pages/Product'
+import Product_List from './component/pages/Product_List'
+import MenHero from './component/pages/MenHero'
+import Login from './component/pages/Login'
+import SignUp from './component/pages/SignUp'
 
 
 function App() {

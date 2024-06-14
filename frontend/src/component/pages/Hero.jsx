@@ -7,19 +7,19 @@ import {
   } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button";
 
-import Hero_Products from './Hero_Products'
-import Gift_Card from './Gift_Card'
-import Collections from './Collections'
-import Discover_Front from './Discover_Front'
-import Explore_Front from './Explore_Front'
-import Blog from './Blog'
-import NavBar from './NavBar'
+import Hero_Products from '../Hero_Products'
+import Gift_Card from '../Gift_Card'
+import Collections from '../Collections'
+import Discover_Front from '../Discover_Front'
+import Explore_Front from '../Explore_Front'
+import Blog from '../Blog'
+import NavBar from '../NavBar'
 import { Link } from 'react-router-dom';
 
 
-import heroImg from '../assets/imgs/rolex.png'
-import heroDmax from '../assets/imgs/dmax.png'
-import Footer from "./Footer";
+import heroImg from '../../assets/imgs/rolex.png'
+import heroDmax from '../../assets/imgs/dmax.png'
+import Footer from "../Footer";
 const Hero = () => {
     return ( 
         <>
