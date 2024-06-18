@@ -3,7 +3,7 @@ const Banner = () => {
         <div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full bg-gradient-to-r from-neutral-300 to-stone-400 py-5 px-2 rounded-lg">
-                <div className="flex flex-col gap-1 justify-start items-center py-3 md:py-0 w-full md:border-r-4 md:border-b-0 border-b-4">
+                <div className="flex flex-col gap-1 justify-start py-3 md:py-0 w-full md:border-r-4 md:border-b-0 border-b-4">
                     <h1 className="font-extrabold text-start text-md uppercase">
                         Free express delivery
                     </h1>
@@ -11,7 +11,7 @@ const Banner = () => {
                         7 days a week including sunday
                     </p>
                 </div>
-                <div className="flex flex-col gap-1 justify-evenly items-center py-3 md:py-0 w-full md:border-r-4 md:border-b-0 border-b-4">
+                <div className="flex flex-col gap-1 justify-start  py-3 md:py-0 w-full md:border-r-4 md:border-b-0 border-b-4">
                     <h1 className="font-extrabold text-md  capitalize">
                         Free Clicks & Collect Service
                     </h1>
@@ -19,7 +19,7 @@ const Banner = () => {
                         From Over 100 Showrooms Nationwide
                     </p>
                 </div>
-                <div className="flex flex-col gap-1 justify-evenly items-center w-full">
+                <div className="flex flex-col gap-1 justify-start w-full">
                     <h1 className="font-extrabold text-md capitalize">
                         Up to 3 years interest free credit
                     </h1>
