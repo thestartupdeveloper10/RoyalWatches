@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const User = require("../models/user");
 const {
   verifyToken,
@@ -11,10 +12,8 @@ const usersRouter = require("express").Router();
 
 usersRouter.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
   if (req.body.password) {
-    req.body.password = CryptoJS.AES.encrypt(
-      req.body.password,
-      process.env.PASS_SEC
-    ).toString();
+    const saltRounds = 10
+     await bcrypt.hash(req.body.password, saltRounds)
   }
 
   try {

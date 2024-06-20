@@ -37,14 +37,14 @@ authRouter.post('/login', async (request, response) => {
   }
 
   const userForToken = {
-    username: user.username,
     id: user._id,
+    isAdmin: user.isAdmin, 
   }
 
   // token expires in 60*60 seconds, that is, in one hour
   const token = jwt.sign(   
      userForToken,
-     process.env.SECRET,
+     process.env.JWT_SEC,
      { expiresIn: 60*60 }  
     )
 
