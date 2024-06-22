@@ -1,24 +1,22 @@
 export const sliderItems = [
     {
       id: 1,
-      img: "https://i.ibb.co/XsdmR2c/1.png",
-      title: "SUMMER SALE",
-      desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-      bg: "f5fafd",
+      img: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fHw%3D",
+      title: "Rolex CSE",
+      desc: "Aviator 8 B01 Chronograph 43 Mosquito Watch",
     },
     {
       id: 2,
-      img: "https://i.ibb.co/DG69bQ4/2.png",
-      title: "AUTUMN COLLECTION",
-      desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-      bg: "fcf1ed",
+      img: "https://images.unsplash.com/photo-1594576722512-582bcd46fba3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "Richard MIlle",
+      desc: "Aviator 8 B01 Chronograph 43 Mosquito Watch",
+      
     },
     {
       id: 3,
-      img: "https://i.ibb.co/cXFnLLV/3.png",
-      title: "LOUNGEWEAR LOVE",
-      desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-      bg: "fbf0f4",
+      img: "https://images.unsplash.com/photo-1525740664269-1bb17f251737?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "Jacob Blanc",
+      desc: "Aviator 8 B01 Chronograph 43 Mosquito Watch",
     },
   ];
 
