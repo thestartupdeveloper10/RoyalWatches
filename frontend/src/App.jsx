@@ -1,4 +1,4 @@
-import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
+import { BrowserRouter as Router,Routes,Route,redirect } from 'react-router-dom'
 import './App.css'
 import Cart from './component/pages/Cart'
 import Hero from './component/pages/Hero'
@@ -12,6 +12,10 @@ import WomenHero from './component/pages/WomenHero'
 
 function App() {
 
+  const user = true
+    if (!user) {
+    return redirect("/login");
+  }
 
   return (
     <>
@@ -20,11 +24,14 @@ function App() {
           <Routes>
             <Route path='/' element={<Hero/>}></Route>
             <Route path='/products' element={<Product_List/>}></Route>
-            <Route path='/product' element={<Product/>}></Route>
+            <Route path='/products/:category' element={<Product_List/>}></Route>
+            <Route path='/product/:id' element={<Product/>}></Route>
             <Route path='/cart' element={<Cart/>}></Route>
             <Route path='/men' element={<MenHero/>}></Route>
             <Route path='/women' element={<WomenHero/>}></Route>
-            <Route path='/login' element={<Login/>}></Route>
+            <Route path='/login' element=
+              { <Login/>}>
+            </Route>
             <Route path='/signup' element={<SignUp/>}></Route>
           </Routes>
       </Router>

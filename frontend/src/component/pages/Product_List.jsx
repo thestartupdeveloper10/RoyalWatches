@@ -1,10 +1,8 @@
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-
 import NavBar from '../NavBar';
 import Footer from '../Footer';
 
-import heroImg from '../../assets/imgs/rolex.png'
-import heroDmax from '../../assets/imgs/dmax.png'
+import { popularProducts } from "../../data";
+import Single_product from '../Single_product';
 
 const Product_List = () => {
   return (
@@ -19,56 +17,10 @@ const Product_List = () => {
             <div className='lg:mb-20 mb-8'>Category</div>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
 
+                {popularProducts.map((item)=>{
+                    return <Single_product item={item} key={item.id}/>
+                })}
 
-                <div className="grid grid-cols-2 bg-[#f7f8f2] hover:shadow-lg transition duration-300 hover:scale-105 pb-6 md:pb-0">
-                    <div className="flex flex-col justify-between px-6 pt-6">
-                        <div className="flex flex-col justify-start pb-4 md:pb-0 cursor-pointer">
-                            <FavoriteBorderIcon/>
-                        </div>
-                        <div className="flex flex-col justify-start md:gap-2 gap-1">
-                            <h1 className="font-bold text-start capitalize">Datejust 36</h1>
-                            <p className='text-start'>Lorem ipsum dolor sit amet consectetur</p>
-                        </div>
-                        <div>
-                        </div>
-                    </div>
-                    <div>
-                        <img src={heroDmax} alt="" className="h-full lg:object-cover object-contain transition duration-300 hover:scale-105" />
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-2 bg-[#f7f8f2] hover:shadow-lg transition duration-300 hover:scale-105 pb-6 md:pb-0">
-                    <div className="flex flex-col justify-between px-6 pt-6">
-                        <div className="flex flex-col justify-start pb-4 md:pb-0 cursor-pointer">
-                            <FavoriteBorderIcon/>
-                        </div>
-                        <div className="flex flex-col justify-start md:gap-2 gap-1">
-                            <h1 className="font-bold text-start capitalize">Datejust 36</h1>
-                            <p className='text-start'>Lorem ipsum dolor sit amet consectetur</p>
-                        </div>
-                        <div>
-                        </div>
-                    </div>
-                    <div>
-                        <img src={heroImg} alt="" className="h-full lg:object-cover object-contain transition duration-300 hover:scale-105" />
-                    </div>
-                </div>
-                <div className="grid grid-cols-2 bg-[#f7f8f2] hover:shadow-lg transition duration-300 hover:scale-105 pb-6 md:pb-0">
-                    <div className="flex flex-col justify-between px-6 pt-6">
-                        <div className="flex flex-col justify-start pb-4 md:pb-0 cursor-pointer">
-                            <FavoriteBorderIcon/>
-                        </div>
-                        <div className="flex flex-col justify-start md:gap-2 gap-1">
-                            <h1 className="font-bold text-start capitalize">Datejust 36</h1>
-                            <p className='text-start'>Lorem ipsum dolor sit amet consectetur</p>
-                        </div>
-                        <div>
-                        </div>
-                    </div>
-                    <div>
-                        <img src={heroDmax} alt="" className="h-full lg:object-cover object-contain transition duration-300 hover:scale-105" />
-                    </div>
-                </div>
             </div>
         </div>
       </div>
