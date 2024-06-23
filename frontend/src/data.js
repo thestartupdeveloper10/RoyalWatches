@@ -27,7 +27,7 @@ export const sliderItems = [
       title: "News in Jewelary",
       des:"explore our range of luxury Jewelary",
       action:"Shop The Collection",
-      cat:"women"
+      cat:"Women"
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ export const sliderItems = [
       title: "News in Watches",
       des:"explore our range of luxury Watches",
       action:"Shop The Collection",
-      cat:"men"
+      cat:"Men"
     }
   ];
 

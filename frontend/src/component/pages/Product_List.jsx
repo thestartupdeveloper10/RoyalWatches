@@ -1,10 +1,26 @@
 import NavBar from '../NavBar';
 import Footer from '../Footer';
+import { useLocation } from "react-router";
+import { useState } from "react";
+import Products from '../Products';
 
-import { popularProducts } from "../../data";
-import Single_product from '../Single_product';
+
 
 const Product_List = () => {
+
+  const location = useLocation();
+  const cat = location.pathname.split("/")[2];
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("newest");
+
+  const handleFilters = (e) => {
+    const value = e.target.value;
+    setFilters({
+      ...filters,
+      [e.target.name]: value,
+    });
+  };
+
   return (
     <div>
         <NavBar/>
@@ -21,20 +37,20 @@ const Product_List = () => {
           <span className="md:text-xl font-semibold mr-5 sm:mr-0">Filter Products:</span>
           <select
             name="color"
-            onChange={()=>{}}
+            onChange={handleFilters}
             className="p-2 m-0 mr-3 sm:mr-5 sm:m-5"
           >
             <option disabled>Color</option>
-            <option>white</option>
-            <option>black</option>
-            <option>red</option>
-            <option>blue</option>
-            <option>yellow</option>
-            <option>green</option>
+            <option>White</option>
+            <option>Black</option>
+            <option>Red</option>
+            <option>Blue</option>
+            <option>Yellow</option>
+            <option>Green</option>
           </select>
           <select
             name="size"
-            onChange={()=>{}}
+            onChange={handleFilters}
             className="p-2 m-0 sm:mr-5 sm:m-5"
           >
             <option disabled>Size</option>
@@ -48,7 +64,7 @@ const Product_List = () => {
         <div className="m-5 flex items-center sm:flex-row sm:w-auto">
           <span className="md:text-xl font-semibold mr-5 sm:mr-0">Sort Products:</span>
           <select
-            onChange={()=>{}}
+            onChange={(e) => setSort(e.target.value)}
             className="p-2 m-0 sm:mr-5 sm:m-5"
           >
             <option value="newest">Newest</option>
@@ -57,16 +73,8 @@ const Product_List = () => {
           </select>
         </div>
       </div>
-
-
             </div>
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-
-                {popularProducts.map((item)=>{
-                    return <Single_product item={item} key={item.id}/>
-                })}
-
-            </div>
+           <Products cat={cat} filters={filters} sort={sort}/>
         </div>
       </div>
       <Footer/>
