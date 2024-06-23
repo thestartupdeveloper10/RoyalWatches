@@ -4,9 +4,8 @@ import Single_product from './Single_product';
 import axios from "axios";
 import { useState,useEffect } from "react";
 
-function Products({cat,filters,sort}) {
-   
 
+function Products({ cat, filters, sort }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -20,7 +19,7 @@ function Products({cat,filters,sort}) {
         );
         setProducts(res.data);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     };
     getProducts();
@@ -55,15 +54,17 @@ function Products({cat,filters,sort}) {
 
   return (
     <div>
-         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-
-{filteredProducts.map((item)=>{
-    return <Single_product item={item} key={item.id}/>
-})}
-
-</div>
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+        {cat?
+        filteredProducts.map((item) => (
+          <Single_product item={item} key={item.id} />
+        )):
+        products
+            .map((item) => <Single_product item={item} key={item.id} />)}
+        
+      </div>
     </div>
-  )
+  );
 }
 
 export default Products

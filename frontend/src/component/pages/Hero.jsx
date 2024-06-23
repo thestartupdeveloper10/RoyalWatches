@@ -10,6 +10,7 @@ import NavBar from '../NavBar'
 
 import Footer from "../Footer";
 import Hero_slider from "../Hero_slider";
+
 const Hero = () => {
     return ( 
         <>
@@ -18,6 +19,7 @@ const Hero = () => {
            <Hero_slider/>
 
             <Collections/>
+        
         <Hero_Products/>
         <Discover_Front/>
         <Gift_Card/>

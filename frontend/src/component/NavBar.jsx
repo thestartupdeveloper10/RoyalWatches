@@ -10,7 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 const NavBar = () => {
     return ( 
         <div>
-            <div className="flex justify-evenly items-center w-full bg-[#fffafa] fixed z-50 left-0 py-4 md:py-6 px-4 md:px-8 top-0">
+            <div className="flex justify-evenly items-center w-full bg-[#e2e2ba] fixed z-50 left-0 py-4 md:py-6 px-4 md:px-8 top-0">
                 <div  className="hidden md:flex justify-start  gap-12 items-center w-full">
                     <Link to="/men">
                     <Button>Men</Button>

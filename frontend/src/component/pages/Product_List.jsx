@@ -27,7 +27,7 @@ const Product_List = () => {
       <div className='mt-16'>
         <div className="flex flex-col w-full justify-center items-center gap-3 lg:gap-6 lg:mb-10 mb-8">
           <h1 className="font-lightbold md:text-xl text-lg uppercase">Royal watches</h1>
-          <h1 className="font-extrabold lg:text-[56px] md:text-[36px] text-2xl">Royalwatches Men&apos;s watches</h1>
+          <h1 className="font-extrabold lg:text-[56px] md:text-[36px] text-2xl">Royalwatches {cat} watches</h1>
         </div>
         <div>
             <div className='lg:mb-20 mb-8 bg-[#f3f3a844]'>
