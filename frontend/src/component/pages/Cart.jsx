@@ -1,8 +1,4 @@
 import { Add, Remove } from "@mui/icons-material";
-
-
-import heroImg from '../../assets/imgs/rolex.png'
-import heroDmax from '../../assets/imgs/dmax.png'
 import NavBar from "../NavBar";
 import Footer from "../Footer";
 import { useSelector } from "react-redux";

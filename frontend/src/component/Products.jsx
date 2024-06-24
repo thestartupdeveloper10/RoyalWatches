@@ -57,10 +57,10 @@ function Products({ cat, filters, sort }) {
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
         {cat?
         filteredProducts.map((item) => (
-          <Single_product item={item} key={item.id} />
+          <Single_product item={item} key={item._id} />
         )):
         products
-            .map((item) => <Single_product item={item} key={item.id} />)}
+            .map((item) => <Single_product item={item} key={item._id} />)}
         
       </div>
     </div>

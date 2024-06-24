@@ -15,6 +15,8 @@ const Product = () => {
   const [size, setSize] = useState(""); // State to track selected size
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+
+  
   useEffect(() => {
     const getProduct = async () => {
       try {

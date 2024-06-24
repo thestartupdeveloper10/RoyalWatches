@@ -41,12 +41,13 @@ const Product_List = () => {
             className="p-2 m-0 mr-3 sm:mr-5 sm:m-5"
           >
             <option disabled>Color</option>
-            <option>White</option>
-            <option>Black</option>
-            <option>Red</option>
-            <option>Blue</option>
-            <option>Yellow</option>
-            <option>Green</option>
+            <option>white</option>
+            <option>black</option>
+            <option>red</option>
+            <option>blue</option>
+            <option>yellow</option>
+            <option>green</option>
+            <option>gray</option>
           </select>
           <select
             name="size"

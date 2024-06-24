@@ -40,7 +40,7 @@ app.use(middleware.requestLogger)
 // app.use('/api/notes', notesRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/users', usersRouter)
-app.use('/api/productS', productRouter)
+app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
 app.use('/api/orders', orderRouter)
 app.use("/api/checkout", stripeRoute);

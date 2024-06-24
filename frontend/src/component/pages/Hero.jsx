@@ -2,7 +2,6 @@ import Hero_Products from '../Hero_Products'
 import Gift_Card from '../Gift_Card'
 import Collections from '../Collections'
 import Discover_Front from '../Discover_Front'
-import Explore_Front from '../Explore_Front'
 import Blog from '../Blog'
 import NavBar from '../NavBar'
 
@@ -12,6 +11,10 @@ import Footer from "../Footer";
 import Hero_slider from "../Hero_slider";
 
 const Hero = () => {
+
+    
+    const description =[' From intricate complications to avant-garde designs, the worlds most revered watchmakers unveil their masterpieces, captivating enthusiasts and setting the tempo for the luxury timepiece industry','These wrist-bound masterpieces blend precision mechanics with exquisite craftsmanship, often featuring rare materials and limited production runs.Each timepiece tells a unique story of heritage, innovation, and uncompromising quality.']
+
     return ( 
         <>
         <NavBar/>
@@ -20,11 +23,11 @@ const Hero = () => {
 
             <Collections/>
         
-        <Hero_Products/>
-        <Discover_Front/>
+        <Hero_Products title="New Arrivals" />
+        <Discover_Front title="Watches & Wonders" desc={description[0]}/>
         <Gift_Card/>
-        <Explore_Front/>
-        <Hero_Products/>
+        <Discover_Front title="The Ticking Treasures" desc={description[1]}/>
+        <Hero_Products title="Best Sellers" />
         <Blog/>
         </div>
         <Footer/>
