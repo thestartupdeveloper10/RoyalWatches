@@ -4,13 +4,17 @@ import Footer from "../Footer";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { publicRequest } from "../../service/requestMethods";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../redux/cartRedux";
 
 const Product = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
-  const [selectedSize, setSelectedSize] = useState(""); // State to track selected size
-
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState(""); // State to track selected size
+  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -23,8 +27,20 @@ const Product = () => {
     getProduct();
   }, [id]);
 
-  const handleSizeClick = (size) => {
-    setSelectedSize(size); // Set the selected size
+
+
+  const handleQuantity = (type) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const handleClick = () => {
+    dispatch(
+      addProduct({ ...product, quantity, color, size })
+    );
   };
 
   return (
@@ -48,7 +64,7 @@ const Product = () => {
                       className="w-6 h-6 rounded-full mr-2 cursor-pointer"
                       style={{ backgroundColor: c }}
                       key={index}
-                      onClick={() => console.log(c)}
+                      onClick={() => setColor(c)}
                     ></div>
                   ))}
                 </div>
@@ -56,25 +72,26 @@ const Product = () => {
               <div className="md:ml-8">
                 <span className="text-lg font-light px-2">Size</span>
                 <div className="mt-2 flex flex-wrap">
+                <select 
+                  className="border border-gray-300 rounded px-2 py-1" 
+                  value={size} 
+                  onChange={(e) => setSize(e.target.value)}
+                >
+                  <option value="" disabled>Select a size</option>
                   {product.size?.map((size, index) => (
-                    <button
-                      key={index}
-                      className={`border border-yellow-500 rounded px-2 py-1 mr-2 mb-2 cursor-pointer ${selectedSize === size ? 'bg-gray-600' : ''}`}
-                      onClick={() => handleSizeClick(size)}
-                    >
-                      {size}
-                    </button>
+                    <option key={index} value={size}>{size}</option>
                   ))}
+                </select>
                 </div>
               </div>
             </div>
             <div className="mt-8 flex items-center justify-between">
               <div className="flex items-center mr-4">
-                <Remove className="w-5 h-5 bg-gray-400 rounded-full cursor-pointer" />
-                <span className="mx-2 font-bold">1</span>
-                <Add className="w-5 h-5 bg-gray-400 rounded-full cursor-pointer" />
+                <Remove className="w-5 h-5 bg-gray-400 rounded-full cursor-pointer" onClick={() => handleQuantity("dec")}  />
+                <span className="mx-2 font-bold">{quantity}</span>
+                <Add className="w-5 h-5 bg-gray-400 rounded-full cursor-pointer" onClick={() => handleQuantity("inc")} />
               </div>
-              <button className="px-6 py-3 bg-white rounded-md border border-black text-black font-medium hover:bg-gray-100 transition-colors">
+              <button onClick={handleClick} className="px-6 py-3 bg-white rounded-md border border-black text-black font-medium hover:bg-gray-100 transition-colors">
                 ADD TO CART
               </button>
             </div>
