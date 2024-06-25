@@ -128,3 +128,9 @@ h2 {
      background: #fff;
      color: #d13161;
 }
+
+.not-allowed {
+     cursor: not-allowed;
+     background-color: green;
+ }
+ 
