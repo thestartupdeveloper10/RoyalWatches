@@ -8,16 +8,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  { name: "January", Total: 1200 },
-  { name: "February", Total: 2100 },
-  { name: "March", Total: 800 },
-  { name: "April", Total: 1600 },
-  { name: "May", Total: 900 },
-  { name: "June", Total: 1700 },
-];
 
-const Chart = ({ aspect, title }) => {
+
+const Chart = ({ aspect,data,dataKey,title }) => {
   return (
     <div className="chart">
       <div className="title">{title}</div>
@@ -39,7 +32,7 @@ const Chart = ({ aspect, title }) => {
           <Tooltip />
           <Area
             type="monotone"
-            dataKey="Total"
+            dataKey={dataKey}
             stroke="#8884d8"
             fillOpacity={1}
             fill="url(#total)"

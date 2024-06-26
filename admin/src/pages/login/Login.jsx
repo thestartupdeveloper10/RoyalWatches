@@ -1,24 +1,26 @@
 import "./Login.css";
 import { useState } from "react";
+import { login } from "../../redux/apiCalls";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
 
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const dispatch = useDispatch();
 
   const handleClick = (e) => {
     e.preventDefault();
-    // login(dispatch, { username, password });
+    login(dispatch, { username, password });
   };
 
     return (
       <div className="overal">
 
-    <form class="form">
-       <p class="form-title">Sign in to your account</p>
-        <div class="input-container">
+    <form className="form">
+       <p className="form-title">Sign in to your account</p>
+        <div className="input-container">
           <input 
           placeholder="Enter username" 
           type="text" 
@@ -30,7 +32,7 @@ const Login = () => {
             </svg>
           </span>
       </div>
-      <div class="input-container">
+      <div className="input-container">
           <input
             placeholder="Enter password" 
             type="password"
@@ -44,7 +46,7 @@ const Login = () => {
             </svg>
           </span>
         </div>
-         <button class="submit" type="submit" onClick={handleClick}>
+         <button className="submit" type="submit" onClick={handleClick}>
         Sign in
       </button>
    </form>
