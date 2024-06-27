@@ -1,7 +1,10 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "./home.scss";
-import Widget from "../../components/widget/Widget";
+import IncomeWidget from "../../components/widget/IncomeWidget";
+import UsersWidget from "../../components/widget/UsersWidget";
+import OrderWidget from "../../components/widget/OrderWidget"
+import BalanceWidget from "../../components/widget/BalanceWidget"
 import Featured from "../../components/featured/Featured";
 import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
@@ -51,10 +54,10 @@ console.log(userStats)
       <div className="homeContainer">
         <Navbar />
         <div className="widgets">
-          <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
+         <IncomeWidget/>
+         <OrderWidget/>
+         <UsersWidget/>
+         <BalanceWidget/>
         </div>
         <div className="charts">
           <Featured />

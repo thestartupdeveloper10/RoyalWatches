@@ -4,8 +4,35 @@ import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 
-const New = ({ inputs, title }) => {
+const New = ({title }) => {
+
+  const [inputs, setInputs] = useState({});
+  const [cat, setCat] = useState([]);
+  const [color, setColor] = useState([]);
+  const [size, setSize] = useState([]);
+
+
   const [file, setFile] = useState("");
+
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  console.log(inputs)
+
+  const handleCat = (e) => {
+    setCat(e.target.value.split(","));
+  };
+
+  const handleSize = (e) => {
+    setSize(e.target.value.split(","));
+  };
+
+  const handleColor = (e) => {
+    setColor(e.target.value.split(","));
+  };
 
   return (
     <div className="new">
@@ -40,12 +67,52 @@ const New = ({ inputs, title }) => {
                 />
               </div>
 
-              {inputs.map((input) => (
-                <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
-                  <input type={input.type} placeholder={input.placeholder} />
+                <div className="formInput">
+                  <label>Title</label>
+                  <input name="title" type='text' placeholder="title" onChange={handleChange} />
                 </div>
-              ))}
+        <div className="formInput">
+          <label>Description</label>
+          <input
+            name="desc"
+            type="text"
+            placeholder="description..."
+            onChange={handleChange}
+          />
+        </div>
+        <div className="formInput">
+              <label>Price</label>
+              <input
+                name="price"
+                type="number"
+                placeholder="100"
+                min="0"
+                step="100"
+                required
+                onChange={handleChange}
+              />
+        </div>
+
+        <div className="formInput">
+          <label>Categories</label>
+          <input type="text" name="categories" placeholder="Men,Women" onChange={handleCat} />
+        </div>
+        <div className="formInput">
+          <label>Size</label>
+          <input type="text" name="size" placeholder="S,M,L,XL" onChange={handleSize} />
+        </div>
+        <div className="formInput">
+          <label>Color</label>
+          <input type="text" name="color" placeholder="black,blue,red,gold" onChange={handleColor}/>
+        </div>
+        <div className="formInput">
+          <label>Stock</label>
+          <select name="inStock" onChange={handleChange}>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+          
               <button>Send</button>
             </form>
           </div>
