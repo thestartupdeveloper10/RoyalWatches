@@ -31,12 +31,14 @@ const Hero_Products = ({ title }) => {
             {title}
           </h1>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 w-full mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 w-full mt-10">
           {Array.isArray(products) && products.map((product) => (
             <Card key={product._id}>
+              <Link to={`/product/${product._id}`}>
               <div className="mb-4 bg-[#f7f8f2]">
                 <img src={product.img} alt="" className="rounded-lg object-contain w-full h-[250px]" />
               </div>
+              </Link>
               <CardFooter className='-mb-3'>
                 <h1 className="font-bold text-start text-2xl">{product.title}</h1>
               </CardFooter>

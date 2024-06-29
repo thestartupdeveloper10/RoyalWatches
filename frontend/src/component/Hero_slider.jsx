@@ -10,6 +10,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Link } from "react-router-dom";
 
 function Hero_slider() {
 
@@ -44,8 +45,13 @@ function Hero_slider() {
                                             {item.categories.includes("Men") ? "Men" : "Women"}
                                         </div>
                                         <div className="md:flex lg:flex-row md:gap-2 gap-2 flex flex-col">
+                                            <Link to={item.categories.includes("Men") ? `/products/Men` : `/products/Women`}>
                                             <Button className="lg:px-12">Explore</Button>
+                                            </Link>
+
+                                            <Link to={`/product/${item._id}`} className="w-full">
                                             <Button variant="outline" className="lg:px-12">Buy Now</Button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

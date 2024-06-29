@@ -55,7 +55,6 @@ const Product_List = () => {
             className="p-2 m-0 sm:mr-5 sm:m-5"
           >
             <option disabled>Size</option>
-            <option>XS</option>
             <option>S</option>
             <option>M</option>
             <option>L</option>

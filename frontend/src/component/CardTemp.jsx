@@ -1,27 +1,31 @@
+/* eslint-disable react/prop-types */
 import {
     Card,
     CardContent,
     CardFooter,
   } from "@/components/ui/card"
   import AddIcon from '@mui/icons-material/Add';
+import { Link } from "react-router-dom";
 
-import heroImg from '../assets/imgs/rolex.png'
 
-const CardTemp = () => {
+
+const CardTemp = ({ item }) => {  
     return ( 
         <>
           <Card>
+                <Link to={`/product/${item._id}`}>
                 <div className="mb-4 bg-[#f7f8f2]">
-                    <img src={heroImg} alt="" className="rounded-lg object-contain w-full h-[200px]" />
+                    <img src={item.img} alt="" className="rounded-lg object-contain w-full h-[200px]" />
                 </div>
+                </Link>
                 <CardFooter className='-mb-3'>
-                <h1 className="font-bold text-start text-2xl">Zoldwmiths</h1>
+                <h1 className="font-bold text-start text-xl">{item.title}</h1>
                 </CardFooter>
                 <CardContent >
-                    <p className="capitalize text-[#8c8f8f] font-medium text-sm text-start">36mm White Gold Cluster Engagement</p>
+                    <p className="capitalize text-[#8c8f8f] font-medium text-sm text-start">{item.desc.split(".")[0]}</p>
                 </CardContent>
                 <CardFooter className='flex justify-between' >
-                <h1 className="font-bold text-xl text-start"><span className="pr-2">$</span>289.95</h1>
+                <h1 className="font-bold text-xl text-start"><span className="pr-2">$</span>{item.price}</h1>
                 <AddIcon></AddIcon>
                 </CardFooter>
                 </Card>

@@ -30,17 +30,17 @@ const Cart = () => {
 
           {cart.products.map((product) => (
             <> 
-          <div className="flex justify-between mb-4">
+          <div className="flex flex-col lg:flex-row justify-between mb-4">
             <div className="flex">
               <img src={product.img} alt="Product" className="w-32 h-32 object-cover" />
-              <div className="ml-4">
+              <div className="ml-4 border-t-2 lg:border-t-0 py-1" >
                 <p className="font-semibold text:sm md:text-base">{product.title}</p>
                 <p className="text-sm">{product._id}</p>
                 <div className="w-4 h-4 rounded-full mt-2" style={{ backgroundColor: product.color }}></div>
                 <p className="mt-2">Size: {product.size}</p>
               </div>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col border-2 lg:border-0 items-center py-3">
               <div className="flex items-center mb-2">
                 <Add className="w-5 h-5 bg-gray-400 rounded-full cursor-pointer" />
                 <span className="mx-2">{product.quantity}</span>
