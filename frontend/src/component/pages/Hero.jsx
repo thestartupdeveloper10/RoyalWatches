@@ -11,7 +11,7 @@ import Footer from "../Footer";
 import Hero_slider from "../Hero_slider";
 
 const Hero = () => {
-
+    
     
     const description =[' From intricate complications to avant-garde designs, the worlds most revered watchmakers unveil their masterpieces, captivating enthusiasts and setting the tempo for the luxury timepiece industry','These wrist-bound masterpieces blend precision mechanics with exquisite craftsmanship, often featuring rare materials and limited production runs.Each timepiece tells a unique story of heritage, innovation, and uncompromising quality.']
 

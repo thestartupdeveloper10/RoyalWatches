@@ -54,7 +54,7 @@ function Hero_slider() {
                                 </div>
                                 <div className="col-3 lg:flex flex-col justify-center hidden">
                                     <div className="flex flex-col gap-4">
-                                        <h1 className="font-medium text-start">Description</h1>
+                                        <h1 className="font-extrabold text-2xl text-start">Description</h1>
                                         <p className="text-start text-sm lg:text-base">{item.desc}</p>
                                     </div>
                                 </div>

@@ -26,8 +26,8 @@ function App() {
             <Route path='/products/:category' element={<Product_List/>}></Route>
             <Route path='/product/:id' element={<Product/>}></Route>
             <Route path='/cart' element={<Cart/>}></Route>
-            <Route path='/men' element={<MenHero/>}></Route>
-            <Route path='/women' element={<WomenHero/>}></Route>
+            <Route path='/Men' element={<MenHero/>}></Route>
+            <Route path='/Women' element={<WomenHero/>}></Route>
 
             <Route path="/login" element={user ? (<Navigate replace to="/" />) : ( <Login /> )}/>
 
