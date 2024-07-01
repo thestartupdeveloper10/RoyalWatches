@@ -5,17 +5,25 @@ import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useSelector } from "react-redux";
+import CloseIcon from '@mui/icons-material/Close';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { useState } from 'react';
 
 
 
 const NavBar = () => {
 
+    const [isVisible, setIsVisible] = useState(false);
+
     const quantity = useSelector(state=>state.cart.quantity)
-   
+    const handleClick =()=>{
+        setIsVisible(!isVisible)
+    console.log('clicked')
+     }
 
     return ( 
-        <div>
-            <div className="flex justify-evenly items-center w-full bg-[#e2e2ba] fixed z-50 left-0 py-4 md:py-6 px-4 md:px-8 top-0">
+        <div className='fixed z-50 top-0 w-full bg-[#e2e2ba] left-0'>
+            <div className="flex justify-evenly items-center     py-4 md:py-6 px-4 md:px-8 ">
                 <div  className="hidden md:flex justify-start  gap-12 items-center w-full">
                     <Link to="/Men">
                     <Button>Men</Button>
@@ -26,7 +34,10 @@ const NavBar = () => {
                     </Link>
                 </div>
                 <div className='md:hidden px-1 cursor-pointer'>
-                    <MenuIcon></MenuIcon>
+                    <Button onClick={handleClick} className="px-2 md:px-3">
+                    {  isVisible ?<CloseIcon></CloseIcon> : <MenuIcon></MenuIcon> }
+                    </Button>
+                    
                 </div>
                 <div><Link to="/" className="text-lg md:text-2xl font-bold ">RoyalWatches</Link></div>
                 <div className="flex justify-end gap-2 items-center w-full">
@@ -38,6 +49,22 @@ const NavBar = () => {
                     </Button></Link>   
                 </div>
             </div>
+            <div className='flex px-6 flex-col border-t-2 py-6 gap-3 justify-center w-full border-gray-500 items-start md:hidden z-50' style={{ display: isVisible ? 'flex' : 'none' }} >
+                    <Link to="/Men" className='flex justify-between w-full items-center underline underline-offset-8' >
+                    <h1>Men</h1>
+                    <ArrowForwardIcon/>
+                    
+                    </Link>
+                    
+                    <Link to="/Women" className='flex justify-between w-full items-center underline underline-offset-8'  >
+                    <h1>
+                    Women
+                    </h1>
+                    
+                    <ArrowForwardIcon/>
+                    </Link>
+            </div>
+           
         </div>
      );
 }

@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
-const Hero_Products = ({ title }) => {
+const Hero_Products = ({ title,query }) => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [products, setProducts] = useState([]);
@@ -14,8 +14,14 @@ const Hero_Products = ({ title }) => {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await publicRequest.get("/products");
-        setProducts(Array.isArray(res.data) ? res.data : []);
+        if(title==="New Arrivals"){
+          const res = await publicRequest.get(`/products?${query}`);
+          setProducts(Array.isArray(res.data) ? res.data : []);
+        }else{
+          const res = await publicRequest.get(`/products?${query}`);
+          setProducts(Array.isArray(res.data) ? res.data : []);
+        }
+        
       } catch (err) {
         console.log(err);
       }

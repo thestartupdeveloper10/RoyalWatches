@@ -1,7 +1,8 @@
 import NavBar from "../NavBar";
 import Footer from "../Footer";
 
-import heroImg from '../../assets/imgs/rolex.png'
+
+import heroVideo from '../../assets/videos/womenHero.mp4'
 
 
 import { publicRequest } from "../../service/requestMethods";
@@ -86,17 +87,18 @@ const MenHero = () => {
         <NavBar/>
        <div>
        <div className="first-section uppercase mt-16 rounded-lg">
-        <div className=" lg:col-span-4 relative w-full lg:h-[80dvh] md:h-[45dvh] h-[40dvh]">
-          <div className="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-10 rounded-lg"></div>
-            <img src={heroImg} alt="" className="object-contain bg-no-repeat lg:h-[80dvh] md:h-[45dvh] h-[40dvh] w-full rounded-lg"/>
-            <div className="absolute lg:bottom-12 md:bottom-16 bottom-8 z-10 translate-x-[-50%] left-[50%]  w-auto text-white gap-5 flex flex-col justify-center items-center">
+       <div className=" lg:col-span-4 relative w-full lg:h-[80dvh] md:h-[45dvh] h-[40dvh]">
+          <div className="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-30 rounded-lg"></div>
+            <video src={heroVideo} autoPlay loop className="object-cover bg-no-repeat lg:h-[80dvh] md:h-[45dvh] h-[40dvh] w-full rounded-lg"/>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-auto text-white gap-5 flex flex-col justify-center items-center">
                 <div className="flex justify-center items-center flex-col gap-1">
-                    <h1 className="text-2xl font-bold">New season</h1>
-                    <h2 className="">Extra 15% off code:rtyri</h2>
+                  <h1 className="text-[50px] font-[20px]">New season</h1>
+                  <h2 className="">Extra 15% off code: rtyri</h2>
                 </div>
-                <a href="">
-                    <button className=" text-black md:px-8 md:py-4 px-6 py-[10px] hover:bg-gray-300 duration-150 rounded-xl border-2 bg-transparent">ShopNow</button>
-                </a>
+                <div className="flex gap-4">
+                    <button className=" text-black md:px-8 md:py-4 px-6 py-[10px] hover:bg-gray-300 duration-150 rounded-xl border-2 bg-white">ShopNow</button>
+                    <button className=" text-white md:px-8 md:py-2 px-6 py-[6px] hover:bg-gray-300 duration-150 rounded-xl border-2 bg-transparent">Explore more</button>
+                </div>
             </div>
         </div>
         </div>

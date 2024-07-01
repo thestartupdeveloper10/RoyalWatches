@@ -13,7 +13,8 @@ import Hero_slider from "../Hero_slider";
 const Hero = () => {
     
     
-    const description =[' From intricate complications to avant-garde designs, the worlds most revered watchmakers unveil their masterpieces, captivating enthusiasts and setting the tempo for the luxury timepiece industry','These wrist-bound masterpieces blend precision mechanics with exquisite craftsmanship, often featuring rare materials and limited production runs.Each timepiece tells a unique story of heritage, innovation, and uncompromising quality.']
+    const description =['From intricate complications to avant-garde designs, watchmakers unveil their masterpieces, captivating enthusiasts and setting the tempo for the luxury timepiece industry','These wrist-bound masterpieces blend precision mechanics with exquisite craftsmanship, often featuring rare materials and limited production runs.Each timepiece tells a unique story of heritage, innovation, and uncompromising quality.']
+    
 
     return ( 
         <>
@@ -23,11 +24,11 @@ const Hero = () => {
 
             <Collections/>
         
-        <Hero_Products title="New Arrivals" />
+        <Hero_Products title="New Arrivals" query='new=true' />
         <Discover_Front title="Watches & Wonders" desc={description[0]}/>
         <Gift_Card/>
         <Discover_Front title="The Ticking Treasures" desc={description[1]}/>
-        <Hero_Products title="Best Sellers" />
+        <Hero_Products title="Best Sellers" query='popular=true' />
         <Blog/>
         </div>
         <Footer/>

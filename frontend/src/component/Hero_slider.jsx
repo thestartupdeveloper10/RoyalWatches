@@ -20,7 +20,7 @@ function Hero_slider() {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await publicRequest.get("/products");
+        const res = await publicRequest.get("/products?new=true");
         setProducts(Array.isArray(res.data) ? res.data : []);
       } catch (err) {
         console.log(err);
