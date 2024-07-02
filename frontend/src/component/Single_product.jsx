@@ -30,7 +30,7 @@ const Single_product = ({ item }) => {
             $ {item.price}
             <AddBoxIcon className='cursor-pointer' />
           </div>
-          <div className='flex justify-items-start py-3'>
+          <div className='flex justify-items-start py-4 underline underline-offset-8 text-gray-600'>
             {item.categories.includes("Men") ? "Men" : "Women"}
           </div>
         </div>

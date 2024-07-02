@@ -110,7 +110,7 @@ const Footer = () => {
 
         <hr className="mt-16 mb-10 border-gray-200" />
 
-        <p className="text-sm text-center text-white">© Copyright 2024, All Rights Reserved by Postcraft</p>
+        <p className="text-sm text-center text-white">© Copyright 2024, All Rights Reserved by RoyalWatches</p>
     </div>
 </section>
         </div>

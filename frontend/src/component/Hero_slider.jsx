@@ -38,18 +38,19 @@ function Hero_slider() {
                         <CarouselItem key={index}>
                             <div className="grid lg:grid-cols-3 grid-cols-2 h-full">
                                 <div className="col-1 h-full w-full items-center flex justify-center flex-col pb-8 md:pb-0 px-2 md:px-0">
-                                    <div className="flex justify-start flex-col md:gap-10 gap-5">
-                                        <div className="flex flex-col gap-3">
+                                    <div className="flex justify-start flex-col  md:gap-10 gap-4">
+                                        <div className="flex flex-col items-start gap-3">
                                             <h1 className="uppercase font-semibold md:text-2xl lg:text-4xl text-lg text-start">{item.title}</h1>
-                                            {/* <p className="text-start hidden md:block text-sm md:w-[250px]">{item.desc}</p> */}
-                                            {item.categories.includes("Men") ? "Men" : "Women"}
+                                        <h1 className="underline underline-offset-8 text-gray-600">
+                                        {item.categories.includes("Men") ? "Men" : "Women"}
+                                        </h1>   
                                         </div>
-                                        <div className="md:flex lg:flex-row md:gap-2 gap-2 flex flex-col">
+                                        <div className="md:flex lg:flex-row md:gap-2 gap-4 flex flex-col items-start">
                                             <Link to={item.categories.includes("Men") ? `/products/Men` : `/products/Women`}>
                                             <Button className="lg:px-12">Explore</Button>
                                             </Link>
 
-                                            <Link to={`/product/${item._id}`} className="w-full">
+                                            <Link to={`/product/${item._id}`}>
                                             <Button variant="outline" className="lg:px-12">Buy Now</Button>
                                             </Link>
                                         </div>

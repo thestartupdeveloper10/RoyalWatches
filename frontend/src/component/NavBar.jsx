@@ -52,7 +52,7 @@ const NavBar = () => {
             <div className='flex px-6 flex-col border-t-2 py-6 gap-3 justify-center w-full border-gray-500 items-start md:hidden z-50' style={{ display: isVisible ? 'flex' : 'none' }} >
                     <Link to="/Men" className='flex justify-between w-full items-center underline underline-offset-8' >
                     <h1>Men</h1>
-                    <ArrowForwardIcon/>
+                    <ArrowForwardIcon className='text-gray-600'/>
                     
                     </Link>
                     
@@ -61,7 +61,7 @@ const NavBar = () => {
                     Women
                     </h1>
                     
-                    <ArrowForwardIcon/>
+                    <ArrowForwardIcon className='text-gray-600'/>
                     </Link>
             </div>
            

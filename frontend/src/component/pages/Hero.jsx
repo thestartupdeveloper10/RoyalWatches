@@ -9,6 +9,7 @@ import NavBar from '../NavBar'
 
 import Footer from "../Footer";
 import Hero_slider from "../Hero_slider";
+import Faq from '../Faq'
 
 const Hero = () => {
     
@@ -30,6 +31,7 @@ const Hero = () => {
         <Discover_Front title="The Ticking Treasures" desc={description[1]}/>
         <Hero_Products title="Best Sellers" query='popular=true' />
         <Blog/>
+        <Faq/>
         </div>
         <Footer/>
         </>

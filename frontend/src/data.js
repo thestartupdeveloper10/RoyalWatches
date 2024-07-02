@@ -23,7 +23,7 @@ export const sliderItems = [
   export const collections = [
     {
       id: 1,
-      img: "https://images.unsplash.com/photo-1554151447-b9d2197448f9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8d2F0Y2hlc3xlbnwwfDB8MHx8fDA%3D",
+      img: "https://images.pexels.com/photos/262484/pexels-photo-262484.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       title: "News in Women Watches",
       des:"explore our range of luxury Jewelary",
       action:"Shop The Collection",
@@ -31,7 +31,7 @@ export const sliderItems = [
     },
     {
       id: 2,
-      img: "https://images.unsplash.com/photo-1585477078060-d06978689e34?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      img: "https://images.pexels.com/photos/691640/pexels-photo-691640.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       title: "News in Men Watches",
       des:"explore our range of luxury Watches",
       action:"Shop The Collection",

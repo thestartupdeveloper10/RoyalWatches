@@ -9,6 +9,7 @@ import MenHero from './component/pages/MenHero'
 import Login from './component/pages/Login'
 import SignUp from './component/pages/SignUp'
 import WomenHero from './component/pages/WomenHero'
+import NotFound from './component/pages/NotFound';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
 
            
             <Route path='/signup' element={<SignUp/>}></Route>
+            <Route path='*' element={<NotFound />}/>
           </Routes>
       </Router>
     </>

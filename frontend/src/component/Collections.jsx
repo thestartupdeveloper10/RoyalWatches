@@ -1,36 +1,42 @@
-// import { useEffect, useState } from "react";
 import Banner from "./Banner";
-
-import { collections } from "../data";
 import Collection_item from "./Collection_item";
-// import { publicRequest } from "../service/requestMethods";
+
 
 
 
 const Collections = () => {
-  // const [products, setProducts] = useState([]);
   
-  // useEffect(() => {
-  //   const getProduct = async () => {
-  //     try {
-  //       const res = await publicRequest.get("/products?category=Men");
-  //       setProducts(Array.isArray(res.data) ? res.data : []);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getProduct();
-  // }, []);
-
-  // console.log(products)
+  const items = [
+    {
+      id: 1,
+      img: "https://images.pexels.com/photos/262484/pexels-photo-262484.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      title: "News in Women Watches",
+      des:"explore our range of luxury female watches",
+      action:"Shop The Collection",
+      cat:"Women"
+    },
+    {
+      id: 2,
+      img: "https://images.pexels.com/photos/691640/pexels-photo-691640.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      title: "News in Men Watches",
+      des:"explore our range of luxury Male Watches",
+      action:"Shop The Collection",
+      cat:"Men"
+    }
+  ];
 
     return ( 
-        <div className="md:mt-20 mt-8">
+        <div className="md:mt-20 mt-4">
             <Banner/>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mt-20">
+            <div className="flex justify-start">
+          <h1 className="uppercase font-bold text-md  md:text-xl md:mt-20 ">
+            Curated Category
+          </h1>
+        </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mt-5 md:mt-10">
                
                {
-                collections.map((item)=>{
+                items.map((item)=>{
                   return  <Collection_item item={item} key={item.id}/>
                 })
                }
