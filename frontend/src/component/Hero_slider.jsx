@@ -31,7 +31,7 @@ function Hero_slider() {
 
 
     return (
-        <div className="hero-slider">
+        <div className="hero-slider mx-5 md:mx-8">
             <Carousel>
                 <CarouselContent>
                     {products.map((item, index) => (

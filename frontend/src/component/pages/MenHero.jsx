@@ -102,6 +102,14 @@ const MenHero = () => {
             </div>
         </div>
         </div>
+        <div className=" md:mt-18 mt-10 flex flex-col w-full justify-center items-center gap-3 lg:gap-6 lg:mb-10 mb-8">
+            <h1 className="font-extrabold lg:text-[56px] md:text-[36px] text-2xl">
+                Product Category
+            </h1>
+            <p className="">
+                Focus on the growing trend of sustainable and ethically sourced watches,featuring brands and designers leading this movement
+            </p>
+        </div>
        <div className="first-section grid grid-cols-1 md:grid-cols-2 gap-1 mt-2">
 
 
@@ -117,10 +125,10 @@ const MenHero = () => {
   </div>
 
 
-    <div className="third-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-9 gap-1 mt-1">
+    <div className="third-section grid grid-cols-1 lg:grid-cols-3 gap-1 mt-1">
       {menSport.length>0?(
         menSport.map(product=>(
-          <div className="man-3 lg:col-span-3 relative w-full md:h-[450px] bg-[#f9f6ee]" key={product._id}>
+          <div className="man-3  relative w-full md:h-[450px] bg-[#f9f6ee]" key={product._id}>
             <div className="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-10"></div>
           <img src={product.img} alt="" className="bg-cover bg-no-repeat w-full object-contain h-full"/>
           <Link className="absolute w-2/3 md:bottom-6 bottom-5 z-10 translate-x-[-50%] left-[50%] bg-white text-black md:px-8 md:py-4 px-6 py-[10px] hover:bg-gray-300 duration-150 text-center" to={`/product/${product._id}`}>{product.title}</Link>
