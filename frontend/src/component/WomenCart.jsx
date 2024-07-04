@@ -6,14 +6,15 @@ const WomenCart = ( {item} ) => {
         <>
         
         <div className="mt-16 h-full">
-        <div className="flex flex-col w-full justify-center items-center gap-3 lg:gap-6 lg:mb-10 mb-8">
-            <h1 className="font-extrabold lg:text-[56px] md:text-[36px] text-2xl">
-                Product Category
-            </h1>
-            <p className="">
-                Focus on the growing trend of sustainable and ethically sourced watches,featuring brands and designers leading this movement
-            </p>
-        </div>
+        <div className="md:mt-18 mt-10 flex flex-col w-full justify-center items-center gap-3 lg:gap-6 lg:mb-10 mb-8">
+    <h1 className="font-extrabold lg:text-[56px] md:text-[36px] text-2xl text-gray-800 leading-none">
+        Discover Timeless Elegance with Our Women&apos;s Watches
+    </h1>
+    <p className="text-center text-lg lg:text-xl text-gray-600 max-w-2xl">
+        Step into a world of grace and sophistication with our curated collection of women&apos;s watches. Each piece embodies exquisite craftsmanship and timeless design, perfect for accentuating your elegance and style. Explore the harmony of beauty and precision today.
+    </p>
+</div>
+
         <div className="grid lg:grid-cols-2 gap-3 grid-cols-1">
             <div className="">
             <div className="bg-[#f7f8f2]">

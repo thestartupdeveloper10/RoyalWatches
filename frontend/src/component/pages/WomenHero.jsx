@@ -71,15 +71,24 @@ const WomenHero = () => {
           <div className="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-30 rounded-lg"></div>
             <video src={heroVideo} autoPlay loop className="object-cover bg-no-repeat lg:h-[80dvh] md:h-[45dvh] h-[40dvh] w-full rounded-lg"/>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full md:w-auto text-white gap-5 flex flex-col justify-center items-center">
-                <div className="flex justify-center items-center flex-col gap-1">
-                  <h1 className="md:text-[50px] text-2xl font-extrabold">New season</h1>
-                  <h2 className="text-sm md:text-[20px] uppercase mt-2 font-bold">Top watches crafted by specialists</h2>
-                </div>
-                <div className="flex items-center gap-2 md:gap-4">
-                <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-balance bg-gray-900 font-semibold rounded-full dark:bg-gray-800 dark:text-gray-100">Shop Now</button>
-                <button type="button" className="md:px-8 px-3  py-2 md:py-3 text-sm md:text-balance font-semibold border-2 hover:bg-white hover:text-gray-800 duration-175 rounded-full dark:bg-gray-800 dark:text-gray-100">Explore More</button>
-                </div>
-            </div>
+    <div className="flex justify-center items-center flex-col gap-1">
+        <h1 className="md:text-[50px] text-2xl font-extrabold uppercase text-pink-600">
+            Timeless Elegance
+        </h1>
+        <h2 className="text-sm md:text-xl mt-2 font-bold text-pink-300">
+            Discover Our Stunning Collection of Women&apos;s Watches
+        </h2>
+    </div>
+    <div className="flex items-center gap-2 md:gap-4">
+        <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-full transition duration-300 ease-in-out">
+            Shop Now
+        </button>
+        <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg font-semibold border-2 border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white rounded-full transition duration-300 ease-in-out">
+            Discover More
+        </button>
+    </div>
+</div>
+
         </div>
             <WomenCart item={womenLuxury}/>
             <Discover_Front title={"Glamour Timepieces: Indulge in Luxury"} desc={"Our curated selection features elegant, high-end timepieces that embody sophistication, style, and timeless beauty. Each watch is a masterpiece, crafted with precision and adorned with the finest materials."}/>

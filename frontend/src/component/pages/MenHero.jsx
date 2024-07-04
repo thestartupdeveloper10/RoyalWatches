@@ -90,26 +90,36 @@ const MenHero = () => {
        <div className=" lg:col-span-4 relative w-full lg:h-[80dvh] md:h-[45dvh] h-[40dvh]">
           <div className="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-10 rounded-lg"></div>
             <img src={heroImg} className="object-cover bg-no-repeat lg:h-[80dvh] md:h-[45dvh] h-[40dvh] w-full rounded-lg"/>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full md:w-auto text-white gap-5 flex flex-col justify-center items-center">
-                <div className="flex justify-center items-center flex-col gap-1">
-                  <h1 className="md:text-[50px] text-2xl font-extrabold uppercase">New season</h1>
-                  <h2 className="text-sm md:text-balance mt-2  font-bold">Top watches crafted by specialists</h2>
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full md:w-auto text-white gap-5 flex flex-col justify-center items-center">
+                <div className="flex justify-center items-center flex-col gap-1 h-auto">
+                    <h1 className="md:text-[50px] text-2xl font-extrabold uppercase leading-none">
+                        New Season Collection
+                    </h1>
+                    <h2 className="text-sm md:text-xl capitalize mt-2 font-bold text-gray-100">
+                        Discover Exquisite Men&apos;s Watches Handcrafted by Experts
+                    </h2>
                 </div>
                 <div className="flex items-center gap-2 md:gap-4">
-                <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-balance bg-gray-900 font-semibold rounded-full dark:bg-gray-800 dark:text-gray-100">Shop Now</button>
-                <button type="button" className="md:px-8 px-3  py-2 md:py-3 text-sm md:text-balance font-semibold border-2 hover:bg-white hover:text-gray-800 duration-175 rounded-full dark:bg-gray-800 dark:text-gray-100">Explore More</button>
+                    <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition duration-300 ease-in-out">
+                        Shop Now
+                    </button>
+                    <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg font-semibold border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white rounded-full transition duration-300 ease-in-out">
+                        Explore More
+                    </button>
                 </div>
-            </div>
+</div>
+
         </div>
         </div>
-        <div className=" md:mt-18 mt-10 flex flex-col w-full justify-center items-center gap-3 lg:gap-6 lg:mb-10 mb-8">
-            <h1 className="font-extrabold lg:text-[56px] md:text-[36px] text-2xl">
-                Product Category
-            </h1>
-            <p className="">
-                Focus on the growing trend of sustainable and ethically sourced watches,featuring brands and designers leading this movement
-            </p>
-        </div>
+        <div className="md:mt-18 mt-10 flex flex-col w-full justify-center items-center gap-3 lg:gap-6 lg:mb-10 mb-8">
+    <h1 className="font-extrabold lg:text-[56px] md:text-[36px] text-2xl text-gray-800">
+        Elevate Your Style with Our Luxury Watches
+    </h1>
+    <p className="text-center text-lg lg:text-xl text-gray-600 max-w-2xl">
+        Discover the epitome of elegance and precision with our exclusive collection of men&apos;s watches. Each timepiece is a masterpiece, combining impeccable craftsmanship with timeless design to complement your unique style. Explore the latest trends in luxury, durability, and innovation.
+    </p>
+</div>
+
        <div className="first-section grid grid-cols-1 md:grid-cols-2 gap-1 mt-2">
 
 
