@@ -92,20 +92,22 @@ const MenHero = () => {
             <img src={heroImg} className="object-cover bg-no-repeat lg:h-[80dvh] md:h-[45dvh] h-[40dvh] w-full rounded-lg"/>
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full md:w-auto text-white gap-5 flex flex-col justify-center items-center">
                 <div className="flex justify-center items-center flex-col gap-1 h-auto">
-                    <h1 className="md:text-[50px] text-2xl font-extrabold uppercase leading-none">
+                    <h1 className="md:text-[50px] text-2xl font-extrabold uppercase leading-none text-[#ecd9d9]">
                         New Season Collection
                     </h1>
-                    <h2 className="text-sm md:text-xl capitalize mt-2 font-bold text-gray-100">
+                    <h2 className="text-sm md:text-xl capitalize mt-2 font-bold text-[#c9acac]">
                         Discover Exquisite Men&apos;s Watches Handcrafted by Experts
                     </h2>
                 </div>
                 <div className="flex items-center gap-2 md:gap-4">
-                    <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition duration-300 ease-in-out">
-                        Shop Now
-                    </button>
-                    <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg font-semibold border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white rounded-full transition duration-300 ease-in-out">
-                        Explore More
-                    </button>
+                <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg bg-[#948585] hover:bg-[#c9acac] text-white font-semibold rounded-full transition duration-300 ease-in-out">
+            Shop Now
+        </button>
+        <Link to="/products/Men">
+        <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg font-semibold border-2 border-[#ecd9d9] text-[#ecd9d9] hover:bg-[#ecd9d9] hover:text-gray-800 rounded-full transition duration-300 ease-in-out">
+            Discover More
+        </button>
+        </Link>
                 </div>
 </div>
 

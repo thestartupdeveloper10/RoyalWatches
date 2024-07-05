@@ -3,11 +3,43 @@ import {
     CardContent,
     CardTitle,
   } from "@/components/ui/card"
-
-import collection1 from '../assets/imgs/collection1.jpg'
-import collection2 from '../assets/imgs/collection2.jpg' 
+import { useEffect, useState } from "react"
+import { Link, useLocation } from "react-router-dom"
 
 const Blog = () => {
+
+    const location = useLocation();
+    const id = location.pathname.split("/")[2];
+
+    const api=import.meta.env.VITE_NEWS_NY_API
+
+    const [blogs,setBlogs] = useState([])
+
+    useEffect(()=>{
+
+        
+            // https://api.nytimes.com/svc/search/v2/articlesearch.json?q={watches,tagheuer,rolex,patek}&
+
+            
+        
+            fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q={watches,rolex}&api-key=${api}`)
+            .then(response => response.json())  // Parse JSON
+            .then(result => {
+              if (result.response.docs && Array.isArray(result.response.docs)) {
+                setBlogs(result.response.docs);  // Assuming 'data' is the array of articles
+              } else {
+                console.error('Unexpected API response structure:', result);
+                setBlogs([]);  // Set to empty array if data is not as expected
+              }
+            })
+            .catch(error => console.log('error', error));
+
+    },[id])
+
+   
+//  console.log(blogs)
+
+
     return ( 
         <div>
             <div className="rounded-lg md:py-10 py-4 md:px-8 px-3  bg-[#f7f8f2] md:mt-20 mt-8">
@@ -16,35 +48,19 @@ const Blog = () => {
                     <h1 className="font-bold text-lg">The Blog</h1>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:grid-cols-3">
-                        <Card>
+                    {Array.isArray(blogs) && blogs.map((blog)=>(
+                        <Card key={blog._id}>
+                            <Link to={blog.web_url} target="_blank" >
                         <div className="mb-4">
-                            <img src={collection1} alt="" className="rounded-t-lg object-cover w-full h-full" />
+                            <img src={`https://static01.nyt.com/${blog.multimedia.map((url)=>(url.url)).slice(0,1)}`} alt="" className="rounded-t-lg object-cover w-full h-[300px]" />
                         </div>
-                        <CardTitle className='mb-4 uppercase'>Zenith Defy skyline</CardTitle>
+                        <CardTitle className='mb-4 capitalize'>{blog.headline.main}</CardTitle>
                         <CardContent>
-                            <p className="text-center capitalize text-[#4c4d4d] font-medium">The Zenith Defy Skyline is a luxury wristwatch that epitomizes modern design and advanced horology...</p>
+                            <p className="text-center capitalize text-[#4c4d4d] font-medium">{blog.snippet}</p>
                         </CardContent>
+                        </Link>
                         </Card>
-
-                        <Card>
-                        <div className="mb-4">
-                            <img src={collection2} alt="" className="rounded-t-lg object-cover w-full h-full" />
-                        </div>
-                        <CardTitle className='mb-3 uppercase'>In love with gucci</CardTitle>
-                        <CardContent>
-                            <p className="text-center  text-[#4c4d4d] font-medium">Part of the Zenith Defy collection, it features a bold, geometric case with angular lines...</p>
-                        </CardContent>
-                        </Card>
-
-                        <Card>
-                        <div className="mb-4">
-                            <img src={collection1} alt="" className="rounded-t-lg object-cover w-full h-full" />
-                        </div>
-                        <CardTitle className='mb-4 uppercase'>Zenith Defy skyline</CardTitle>
-                        <CardContent>
-                            <p className="text-center  capitalize text-[#4c4d4d] font-medium">The Zenith Defy Skyline is a luxury wristwatch that epitomizes modern design and advanced horology...</p>
-                        </CardContent>
-                        </Card>
+                    )).slice(0,3)}
                 </div>
             </div>
         </div>
