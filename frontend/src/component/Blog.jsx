@@ -45,8 +45,8 @@ const Blog = () => {
         <div>
             <div className="rounded-lg md:py-10 py-4 md:px-8 px-3  bg-[#f7f8f2] md:mt-20 mt-8">
                 <div className="flex flex-col justify-center items-center mb-3 w-full">
-                    <h1 className="font=extrabold text-sm mb-3">Explore</h1>
-                    <h1 className="font-bold text-lg md:text-xl">The Blog</h1>
+                    <h1 className="font=extrabold text-sm md:text-lg mb-3">Explore</h1>
+                    <h1 className="font-bold text-lg md:text-2xl">The Blog</h1>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:grid-cols-3">
                     {Array.isArray(blogs) && blogs.map((blog)=>(

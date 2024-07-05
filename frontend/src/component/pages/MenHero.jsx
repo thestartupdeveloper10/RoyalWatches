@@ -100,9 +100,11 @@ const MenHero = () => {
                     </h2>
                 </div>
                 <div className="flex items-center gap-2 md:gap-4">
-                <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg bg-[#948585] hover:bg-[#c9acac] text-white font-semibold rounded-full transition duration-300 ease-in-out">
+                  <Link to='/product/667e86ae216613745205f522'>
+        <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg bg-[#948585] hover:bg-[#c9acac] text-white font-semibold rounded-full transition duration-300 ease-in-out">
             Shop Now
         </button>
+        </Link>
         <Link to="/products/Men">
         <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg font-semibold border-2 border-[#ecd9d9] text-[#ecd9d9] hover:bg-[#ecd9d9] hover:text-gray-800 rounded-full transition duration-300 ease-in-out">
             Discover More
