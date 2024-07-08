@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
     return ( 
         <div>
@@ -67,7 +69,7 @@ const Footer = () => {
                     </li>
 
                     <li>
-                        <a href="#" title="" className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> Career </a>
+                        <Link to='/contact' title="" className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> Contact </Link>
                     </li>
                 </ul>
             </div>

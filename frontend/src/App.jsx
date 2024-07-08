@@ -11,6 +11,7 @@ import SignUp from './component/pages/SignUp'
 import WomenHero from './component/pages/WomenHero'
 import NotFound from './component/pages/NotFound';
 import SingleBlog from './component/pages/SingleBlog';
+import Contact from './component/pages/Contact';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path='/cart' element={<Cart/>}></Route>
             <Route path='/Men' element={<MenHero/>}></Route>
             <Route path='/Women' element={<WomenHero/>}></Route>
+            <Route path='/contact' element={<Contact/>}></Route>
 
             <Route path="/login" element={user ? (<Navigate replace to="/" />) : ( <Login /> )}/>
 

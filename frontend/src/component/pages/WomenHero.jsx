@@ -73,7 +73,7 @@ const WomenHero = () => {
             <video src={heroVideo} autoPlay loop className="object-cover bg-no-repeat lg:h-[80dvh] md:h-[45dvh] h-[40dvh] w-full rounded-lg"/>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full md:w-auto text-white gap-5 flex flex-col justify-center items-center">
     <div className="flex justify-center items-center flex-col gap-1">
-        <h1 className="md:text-[50px] text-2xl font-extrabold uppercase text-[#ecd9d9]">
+        <h1 className="md:text-[50px] text-2xl font-extrabold leading-none uppercase text-[#ecd9d9]">
             Timeless Elegance
         </h1>
         <h2 className="text-sm md:text-xl mt-2 font-bold text-[#c9acac]">
@@ -82,12 +82,12 @@ const WomenHero = () => {
     </div>
     <div className="flex items-center gap-2 md:gap-4">
       <Link to='/product/667e7621216613745205f4ff'>
-        <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg bg-[#948585] hover:bg-[#c9acac] text-white font-semibold rounded-full transition duration-300 ease-in-out">
+        <button type="button" className="lg:px-8 px-3 py-2 lg:py-3 text-sm md:text-lg bg-[#948585] hover:bg-[#c9acac] text-white font-semibold rounded-full transition duration-300 ease-in-out">
             Shop Now
         </button>
         </Link>
         <Link to="/products/Women">
-        <button type="button" className="md:px-8 px-3 py-2 md:py-3 text-sm md:text-lg font-semibold border-2 border-[#ecd9d9] text-[#ecd9d9] hover:bg-[#ecd9d9] hover:text-gray-800 rounded-full transition duration-300 ease-in-out">
+        <button type="button" className="lg:px-8 px-3 py-2 lg:py-3 text-sm md:text-lg font-semibold border-2 border-[#ecd9d9] text-[#ecd9d9] hover:bg-[#ecd9d9] hover:text-gray-800 rounded-full transition duration-300 ease-in-out">
             Discover More
         </button>
         </Link>
