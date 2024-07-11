@@ -2,6 +2,8 @@
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from 'react-router-dom';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import { useDispatch } from 'react-redux';
+import { addProduct } from "../redux/cartRedux";
 
 const Single_product = ({ item }) => {
   // Function to get the first paragraph
@@ -14,6 +16,11 @@ const Single_product = ({ item }) => {
 
   // Extract the first paragraph from item.desc
   const firstParagraph = getFirstParagraph(item.desc);
+  const dispatch = useDispatch();
+
+  const quantity = 1;
+  const color= item.color[0]
+  const size = item.size[0]
 
   return (
     <div className="grid grid-cols-2 bg-[#f7f8f2] hover:shadow-lg transition duration-300 hover:scale-105 pb-6 md:pb-0">
@@ -28,7 +35,7 @@ const Single_product = ({ item }) => {
         <div className='flex flex-col'>
           <div className='flex justify-between font-bold'>
             $ {item.price}
-            <AddBoxIcon className='cursor-pointer' />
+            <AddBoxIcon onClick={()=>{dispatch(addProduct({...item,quantity, color, size}))}} className='cursor-pointer' />
           </div>
           <div className='flex justify-items-start py-4 underline underline-offset-8 text-gray-600'>
             {item.categories.includes("Men") ? "Men" : "Women"}

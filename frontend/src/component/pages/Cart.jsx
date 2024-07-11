@@ -2,6 +2,7 @@ import { Add, Remove } from "@mui/icons-material";
 import NavBar from "../NavBar";
 import Footer from "../Footer";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
 
@@ -12,7 +13,9 @@ const Cart = () => {
      <div className="md:py-16 py-6 mt-10">
       <h1 className="text-3xl font-light text-center mb-8">YOUR BAG</h1>
       <div className="flex justify-between items-center mb-8">
+      <Link to='/products'>
         <button className="px-4 py-2 font-semibold">CONTINUE SHOPPING</button>
+        </Link>
         <div className="hidden md:flex">
           <span className="text-sm underline cursor-pointer mr-4">
             Shopping Bag(2)
@@ -28,11 +31,14 @@ const Cart = () => {
       <div className="flex flex-col md:flex-row justify-between w-full">
         <div className="flex-1 mr-4 w-full">
 
-          {cart.products.map((product) => (
+          {cart.products.map((product) =>{ 
+            console.log(product.price)
+            return(
+            
             <> 
-          <div className="flex flex-col lg:flex-row justify-between mb-4">
+          <div className="flex flex-col lg:flex-row justify-between mb-4" key={product._id}>
             <div className="flex">
-              <img src={product.img} alt="Product" className="w-32 h-32 object-cover" />
+              <img src={product.img} alt={product.title} className="w-32 h-32 object-cover" />
               <div className="ml-4 border-t-2 lg:border-t-0 py-1" >
                 <p className="font-semibold text:sm md:text-base">{product.title}</p>
                 <p className="text-sm">{product._id}</p>
@@ -51,7 +57,7 @@ const Cart = () => {
           </div>
           <hr className="border-gray-300 mb-4" />
           </>
-        ))}
+        )})}
         </div>
         <div className="flex-1 border border-gray-300 rounded-lg p-4 mt-4 md:mt-0">
           <h2 className="text-xl font-light mb-4">ORDER SUMMARY</h2>

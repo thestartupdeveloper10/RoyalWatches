@@ -6,10 +6,16 @@ import {
   } from "@/components/ui/card"
   import AddIcon from '@mui/icons-material/Add';
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../redux/cartRedux";
 
 
 
 const CardTemp = ({ item }) => {  
+    const dispatch = useDispatch();
+    const quantity = 1;
+    const color= item.color[0]
+    const size = item.size[0]
     return ( 
         <>
           <Card>
@@ -26,7 +32,7 @@ const CardTemp = ({ item }) => {
                 </CardContent>
                 <CardFooter className='flex justify-between' >
                 <h1 className="font-bold text-xl text-start"><span className="pr-2">$</span>{item.price}</h1>
-                <AddIcon></AddIcon>
+                <AddIcon onClick={()=>{dispatch(addProduct({...item,quantity, color, size}))}} className="cursor-pointer"></AddIcon>
                 </CardFooter>
                 </Card>
         </>

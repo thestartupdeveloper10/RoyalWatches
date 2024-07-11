@@ -5,11 +5,14 @@ import { publicRequest } from "../service/requestMethods";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import { useDispatch } from "react-redux";
+import { addProduct } from "../redux/cartRedux";
 
 const Hero_Products = ({ title,query }) => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [products, setProducts] = useState([]);
+  const dispatch =useDispatch()
 
   useEffect(() => {
     const getProduct = async () => {
@@ -27,7 +30,7 @@ const Hero_Products = ({ title,query }) => {
       }
     };
     getProduct();
-  }, [id]);
+  }, [id, query, title]);
 
   return (
     <div>
@@ -38,7 +41,12 @@ const Hero_Products = ({ title,query }) => {
           </h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 w-full mt-10">
-          {Array.isArray(products) && products.map((product) => (
+          {Array.isArray(products) && products.map((product) => {
+           const quantity = 1;
+           const color= product.color[0]
+           const size = product.size[0]
+         return (
+            
             <Card key={product._id}>
               <Link to={`/product/${product._id}`}>
               <div className="mb-4 bg-[#f7f8f2]">
@@ -53,10 +61,10 @@ const Hero_Products = ({ title,query }) => {
               </CardContent>
               <CardFooter className="flex justify-between">
                 <h1 className="font-bold text-xl text-start"><span className="pr-2">$</span>{product.price}</h1>
-                <AddBoxIcon className="cursor-pointer"/>
+                <AddBoxIcon onClick={()=>{dispatch(addProduct({ ...product, quantity, color, size }))}} className="cursor-pointer"/>
               </CardFooter>
             </Card>
-          )).slice(0, 4)}
+          )}).slice(0, 4)}
         </div>
         <div className="flex justify-start mt-10">
           <Link to="/products">
