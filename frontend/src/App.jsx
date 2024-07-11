@@ -12,6 +12,7 @@ import WomenHero from './component/pages/WomenHero'
 import NotFound from './component/pages/NotFound';
 import SingleBlog from './component/pages/SingleBlog';
 import Contact from './component/pages/Contact';
+import Wishlist from './component/pages/Wishlist';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path='/product/:id' element={<Product/>}></Route>
             <Route path='/blogs' element={<SingleBlog/>}></Route>
             <Route path='/cart' element={<Cart/>}></Route>
+            <Route path='/wishlist' element={<Wishlist/>}></Route>
             <Route path='/Men' element={<MenHero/>}></Route>
             <Route path='/Women' element={<WomenHero/>}></Route>
             <Route path='/contact' element={<Contact/>}></Route>

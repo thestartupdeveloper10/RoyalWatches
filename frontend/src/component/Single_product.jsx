@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { useDispatch } from 'react-redux';
 import { addProduct } from "../redux/cartRedux";
+import { addProductWishlist } from '@/redux/wishlistRedux';
 
 const Single_product = ({ item }) => {
   // Function to get the first paragraph
@@ -26,7 +27,7 @@ const Single_product = ({ item }) => {
     <div className="grid grid-cols-2 bg-[#f7f8f2] hover:shadow-lg transition duration-300 hover:scale-105 pb-6 md:pb-0">
       <div className="flex flex-col justify-between px-6 pt-6">
         <div className="flex flex-col justify-start pb-4 md:pb-0 cursor-pointer">
-          <FavoriteBorderIcon />
+          <FavoriteBorderIcon onClick={()=>{dispatch(addProductWishlist({...item}))}} />
         </div>
         <div className="flex flex-col justify-start md:gap-2 gap-1">
           <h1 className="font-bold text-start capitalize">{item.title}</h1>

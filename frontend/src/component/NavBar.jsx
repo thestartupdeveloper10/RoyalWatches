@@ -16,9 +16,9 @@ const NavBar = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     const quantity = useSelector(state=>state.cart.quantity)
+    const wishlistQuantity = useSelector(state=>state.wishlist.quantity)
     const handleClick =()=>{
         setIsVisible(!isVisible)
-    console.log('clicked')
      }
 
     return ( 
@@ -43,7 +43,9 @@ const NavBar = () => {
                 <div className="flex justify-end gap-2 items-center w-full">
                     
                     <Link to="/login"><Button className="px-2 md:px-3"><LoginIcon/></Button></Link>
-                    <Link><Button className="px-2 md:px-3"><FavoriteBorderIcon/></Button></Link>
+                    <Link to='/wishlist'><Button className="px-2 md:px-3 relative"><FavoriteBorderIcon/>
+                    <div className="rounded-full h-7 w-7 bg-gray-500 flex justify-center items-center absolute -top-3 -right-2"><span>{wishlistQuantity}</span></div>
+                    </Button></Link>
                     <Link to="/cart"><Button className="px-2 md:px-3 relative"><LocalMallIcon/>
                     <div className="rounded-full h-7 w-7 bg-gray-500 flex justify-center items-center absolute -top-3 -right-3"><span>{quantity}</span></div>
                     </Button></Link>   
