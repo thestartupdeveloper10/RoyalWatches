@@ -13,6 +13,7 @@ import NotFound from './component/pages/NotFound';
 import SingleBlog from './component/pages/SingleBlog';
 import Contact from './component/pages/Contact';
 import Wishlist from './component/pages/Wishlist';
+import UserProfile from './component/pages/UserProfile';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path='/Men' element={<MenHero/>}></Route>
             <Route path='/Women' element={<WomenHero/>}></Route>
             <Route path='/contact' element={<Contact/>}></Route>
+            <Route path='/userprofile' element={<UserProfile/>}></Route>
 
             <Route path="/login" element={user ? (<Navigate replace to="/" />) : ( <Login /> )}/>
 

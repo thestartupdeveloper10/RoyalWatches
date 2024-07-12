@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const wishlist = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
   const shippingFee= 100;
 
@@ -38,7 +39,9 @@ const Cart = () => {
               Shopping Bag({cart.products.length})
             </span>
             <span className="text-sm underline cursor-pointer">
-              Your Wishlist (0)
+              <Link to="/wishlist">
+              Your Wishlist ({wishlist.products.length})
+              </Link>
             </span>
           </div>
           <button className="px-4 py-2 rounded-md font-semibold bg-black text-white">

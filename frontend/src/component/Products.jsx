@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
-// import { popularProducts } from "../data";
 import Single_product from './Single_product';
 import axios from "axios";
-import { useState,useEffect } from "react";
-
+import { useState, useEffect } from "react";
 
 function Products({ cat, filters, sort }) {
   const [products, setProducts] = useState([]);
@@ -26,15 +24,14 @@ function Products({ cat, filters, sort }) {
   }, [cat]);
 
   useEffect(() => {
-    cat &&
-      setFilteredProducts(
-        products.filter((item) =>
-          Object.entries(filters).every(([key, value]) =>
-            item[key].includes(value)
-          )
+    setFilteredProducts(
+      products.filter((item) =>
+        Object.entries(filters).every(([key, value]) =>
+          item[key].includes(value)
         )
-      );
-  }, [products, cat, filters]);
+      )
+    );
+  }, [products, filters]);
 
   useEffect(() => {
     if (sort === "newest") {
@@ -55,16 +52,12 @@ function Products({ cat, filters, sort }) {
   return (
     <div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-        {cat?
-        filteredProducts.map((item) => (
+        {filteredProducts.map((item) => (
           <Single_product item={item} key={item._id} />
-        )):
-        products
-            .map((item) => <Single_product item={item} key={item._id} />)}
-        
+        ))}
       </div>
     </div>
   );
 }
 
-export default Products
+export default Products;

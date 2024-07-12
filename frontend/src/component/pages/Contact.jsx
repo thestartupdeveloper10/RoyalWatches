@@ -32,7 +32,7 @@ const Contact = () => {
 				</p>
 			</div>
 		</div>
-		<form noValidate="" className="flex flex-col py-6 bg-[#e1ddd2] md:py-10 space-y-6 rounded-md md:px-6">
+		<form noValidate="" className="flex flex-col py-6 bg-[#e1ddd2] px-3 md:py-10 space-y-6 rounded-md md:px-6">
 			<label className="block">
 				<span className="mb-1 font-bold">Full name</span>
 				<input type="text" placeholder="Leroy Jenkins" className="block mt-2 w-full h-9 px-2   shadow-sm focus:ring focus:ring-opacity-75 focus:dark:ring-violet-600 dark:bg-gray-100" />
