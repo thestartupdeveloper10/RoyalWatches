@@ -1,53 +1,64 @@
-import { BrowserRouter as Router,Routes,Route,Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import './App.css'
-import Cart from './component/pages/Cart'
-import Hero from './component/pages/Hero'
-import Product from './component/pages/Product'
-import Product_List from './component/pages/Product_List'
-import MenHero from './component/pages/MenHero'
-import Login from './component/pages/Login'
-import SignUp from './component/pages/SignUp'
-import WomenHero from './component/pages/WomenHero'
+import './App.css';
+import Cart from './component/pages/Cart';
+import Hero from './component/pages/Hero';
+import Product from './component/pages/Product';
+import Product_List from './component/pages/Product_List';
+import MenHero from './component/pages/MenHero';
+import Login from './component/pages/Login';
+import SignUp from './component/pages/SignUp';
+import WomenHero from './component/pages/WomenHero';
 import NotFound from './component/pages/NotFound';
 import SingleBlog from './component/pages/SingleBlog';
 import Contact from './component/pages/Contact';
 import Wishlist from './component/pages/Wishlist';
 import UserProfile from './component/pages/UserProfile';
-
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
-
   const user = useSelector((state) => state.user.currentUser);
-  console.log(user)
+  console.log(user);
 
   return (
     <>
       <Router>
-
-          <Routes>
-            <Route path='/' element={<Hero/>}></Route>
-            <Route path='/products' element={<Product_List/>}></Route>
-            <Route path='/products/:category' element={<Product_List/>}></Route>
-            <Route path='/product/:id' element={<Product/>}></Route>
-            <Route path='/blogs' element={<SingleBlog/>}></Route>
-            <Route path='/cart' element={<Cart/>}></Route>
-            <Route path='/wishlist' element={<Wishlist/>}></Route>
-            <Route path='/Men' element={<MenHero/>}></Route>
-            <Route path='/Women' element={<WomenHero/>}></Route>
-            <Route path='/contact' element={<Contact/>}></Route>
-            <Route path='/userprofile' element={<UserProfile/>}></Route>
-
-            <Route path="/login" element={user ? (<Navigate replace to="/" />) : ( <Login /> )}/>
-
-           
-            <Route path='/signup' element={<SignUp/>}></Route>
-            <Route path='*' element={<NotFound />}/>
-          </Routes>
+        <Routes>
+          <Route path='/' element={<Hero/>}></Route>
+          <Route path='/products' element={<Product_List/>}></Route>
+          <Route path='/products/:category' element={<Product_List/>}></Route>
+          <Route path='/product/:id' element={<Product/>}></Route>
+          <Route path='/blogs' element={<SingleBlog/>}></Route>
+          <Route 
+            path='/cart' 
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route 
+            path='/wishlist' 
+            element={
+              <ProtectedRoute>
+                <Wishlist />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route path='/Men' element={<MenHero/>}></Route>
+          <Route path='/Women' element={<WomenHero/>}></Route>
+          <Route path='/contact' element={<Contact/>}></Route>
+          <Route path='/userprofile' element={<UserProfile/>}></Route>
+          <Route 
+            path='/login' 
+            element={user ? (<Navigate replace to="/" />) : (<Login />)}
+          ></Route>
+          <Route path='/signup' element={<SignUp/>}></Route>
+          <Route path='*' element={<NotFound />}/>
+        </Routes>
       </Router>
     </>
-  
-  )
+  );
 }
 
-export default App
+export default App;

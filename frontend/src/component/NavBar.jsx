@@ -4,23 +4,25 @@ import LoginIcon from '@mui/icons-material/Login';
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useState } from 'react';
-
+import { logout } from "../redux/userRedux";
 
 const NavBar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const user = useSelector(state => state.user.currentUser);
-
-  console.log(user);
-
   const quantity = useSelector(state => state.cart.quantity);
   const wishlistQuantity = useSelector(state => state.wishlist.quantity);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     setIsVisible(!isVisible);
+  }
+
+  const handleLogout = () => {
+    dispatch(logout());
   }
 
   return (
@@ -39,36 +41,44 @@ const NavBar = () => {
             {isVisible ? <CloseIcon /> : <MenuIcon />}
           </Button>
         </div>
-        <div><Link to="/" className="text-lg md:text-2xl font-bold ">RoyalWatches</Link></div>
+        <div>
+          <Link to="/" className="text-lg md:text-2xl font-bold ">RoyalWatches</Link>
+        </div>
         <div className="flex justify-end gap-2 items-center w-full">
-        <Link to={user === null ? "/login" : "/userprofile"}>
+          <Link to={user ? "/userprofile" : "/login"}>
             <Button className="px-2 md:px-3">
-                {user === null ? (
-                <LoginIcon />
-                ) : (
+              {user ? (
                 user.username.slice(0, 2).toUpperCase()
-                )}
-            </Button>
-        </Link>
-
-          <Link to='/wishlist'>
-            <Button className="px-2 md:px-3 relative"><FavoriteBorderIcon />
-              {wishlistQuantity > 0 && (
-                <div className="rounded-full h-7 w-7 bg-gray-500 flex justify-center items-center absolute -top-3 -right-2">
-                  <span>{wishlistQuantity}</span>
-                </div>
+              ) : (
+                <LoginIcon />
               )}
             </Button>
           </Link>
-          <Link to="/cart">
-            <Button className="px-2 md:px-3 relative"><LocalMallIcon />
-              {quantity > 0 && (
-                <div className="rounded-full h-7 w-7 bg-gray-500 flex justify-center items-center absolute -top-3 -right-3">
-                  <span>{quantity}</span>
-                </div>
-              )}
-            </Button>
-          </Link>
+          {user && (
+            <>
+              <Link to='/wishlist'>
+                <Button className="px-2 md:px-3 relative">
+                  <FavoriteBorderIcon />
+                  {wishlistQuantity > 0 && (
+                    <div className="rounded-full h-7 w-7 bg-gray-500 flex justify-center items-center absolute -top-3 -right-2">
+                      <span>{wishlistQuantity}</span>
+                    </div>
+                  )}
+                </Button>
+              </Link>
+              <Link to="/cart">
+                <Button className="px-2 md:px-3 relative">
+                  <LocalMallIcon />
+                  {quantity > 0 && (
+                    <div className="rounded-full h-7 w-7 bg-gray-500 flex justify-center items-center absolute -top-3 -right-3">
+                      <span>{quantity}</span>
+                    </div>
+                  )}
+                </Button>
+              </Link>
+              <Button onClick={handleLogout} className="px-2 md:px-3">Log out</Button>
+            </>
+          )}
         </div>
       </div>
       <div className='flex px-6 flex-col border-t-2 py-6 gap-3 justify-center w-full border-gray-500 items-start md:hidden z-50' style={{ display: isVisible ? 'flex' : 'none' }}>
@@ -80,9 +90,11 @@ const NavBar = () => {
           <h1>Women</h1>
           <ArrowForwardIcon className='text-gray-600' />
         </Link>
-        <div className='mt-3'>
-            <Button>Log out</Button>
-        </div>
+        {user && (
+          <div className='mt-3'>
+            <Button onClick={handleLogout}>Log out</Button>
+          </div>
+        )}
       </div>
     </div>
   );
