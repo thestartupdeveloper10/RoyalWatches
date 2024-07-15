@@ -25,7 +25,7 @@ const CardTemp = ({ product }) => {
           <Card>
                 
                 <div className="mb-4 bg-[#f7f8f2] relative">
-                    <FavoriteBorderIcon onClick={()=>{dispatch(addProductWishlist({userId,...product}))}} className="absolute top-3 left-3 md:top-6 md:left-6 text-gray-500 cursor-pointer"></FavoriteBorderIcon>
+                    <FavoriteBorderIcon onClick={()=>{dispatch(addProductWishlist({userId,product}))}} className="absolute top-3 left-3 md:top-6 md:left-6 text-gray-500 cursor-pointer"></FavoriteBorderIcon>
                     <Link to={`/product/${product._id}`}>
                     <img src={product.img} alt="" className="rounded-lg object-contain w-full h-[200px]" />
                     </Link>

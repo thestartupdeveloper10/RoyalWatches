@@ -16,8 +16,7 @@ const Cart = () => {
   const shippingFee= 100;
  
 
-  console.log(cart.carts[userId]);
-  console.log(wishlist.products.length)
+
 
   const handleQuantity = (type, productId) => {
     const product = cart.carts[userId].products.find((item) => item._id === productId);
