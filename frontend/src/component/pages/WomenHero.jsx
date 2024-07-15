@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 import heroVideo from '../../assets/videos/hero.mp4'
+import MenProduct from "../MenProduct";
 
 const WomenHero = () => {
 
@@ -108,11 +109,7 @@ const WomenHero = () => {
 
                 {womenClassic.length>0?(
                     womenClassic.map(product=>(
-                    <div className="man-3 relative w-full md:h-[450px] bg-[#f9f6ee] rounded-md" key={product._id}>
-                        <div className="absolute top-0 bottom-0 left-0 right-0 bg-black opacity-10"></div>
-                        <img src={product.img} alt="" className="bg-cover bg-no-repeat w-full object-contain rounded-md h-full"/>
-                        <Link className="absolute md:bottom-6 bottom-5 z-5 translate-x-[-50%] left-[50%] bg-white text-black md:px-8 md:py-4 px-6 py-[10px] hover:bg-gray-300 duration-150 text-center w-2/3" to={`/product/${product._id}`}>{product.title}</Link>
-                    </div>
+                    <MenProduct key={product._id} product={product}/>
                     ))
                 ).slice(0,4):(
                     <p>No products available for the selected categories.</p>

@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
 import CardTemp from "./CardTemp";
 import heroImg from '../assets/imgs/women.jpg'
+
+
 const WomenCart = ( {item} ) => {
+
+    
     return ( 
         <>
         
@@ -17,7 +21,7 @@ const WomenCart = ( {item} ) => {
 
         <div className="grid lg:grid-cols-2 gap-3 grid-cols-1">
             <div className="">
-            <div className="bg-[#f7f8f2]">
+            <div className="bg-[#f7f8f2] relative">
                     <img src={heroImg} alt="" className="rounded-lg object-contain w-full h-full" />
                 </div>
             </div>

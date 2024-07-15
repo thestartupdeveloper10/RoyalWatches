@@ -8,6 +8,8 @@ import {
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/cartRedux";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { addProductWishlist } from '@/redux/wishlistRedux';
 
 
 
@@ -19,11 +21,14 @@ const CardTemp = ({ item }) => {
     return ( 
         <>
           <Card>
-                <Link to={`/product/${item._id}`}>
-                <div className="mb-4 bg-[#f7f8f2]">
+                
+                <div className="mb-4 bg-[#f7f8f2] relative">
+                    <FavoriteBorderIcon onClick={()=>{dispatch(addProductWishlist({...item}))}} className="absolute top-3 left-3 md:top-6 md:left-6 text-gray-500 cursor-pointer"></FavoriteBorderIcon>
+                    <Link to={`/product/${item._id}`}>
                     <img src={item.img} alt="" className="rounded-lg object-contain w-full h-[200px]" />
+                    </Link>
                 </div>
-                </Link>
+               
                 <CardFooter className='-mb-3'>
                 <h1 className="font-bold text-start text-xl">{item.title}</h1>
                 </CardFooter>

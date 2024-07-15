@@ -131,6 +131,6 @@ h2 {
 
 .not-allowed {
      cursor: not-allowed;
-     background-color: green;
+     background-color: rgb(50, 66, 50);
  }
  

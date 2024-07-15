@@ -10,16 +10,16 @@ const Collections = () => {
     {
       id: 1,
       img: "https://images.pexels.com/photos/262484/pexels-photo-262484.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "News in Women Watches",
-      des:"explore our range of luxury female watches",
+      title: "New Releases in Women's Watches",
+      des:"Unveil our stunning selection of premium women's watches",
       action:"Shop The Collection",
       cat:"Women"
     },
     {
       id: 2,
       img: "https://images.pexels.com/photos/691640/pexels-photo-691640.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      title: "News in Men Watches",
-      des:"explore our range of luxury Male Watches",
+      title: "Latest Trends in Men's Watches",
+      des:"Experience the allure of our luxurious Men's watch collection",
       action:"Shop The Collection",
       cat:"Men"
     }

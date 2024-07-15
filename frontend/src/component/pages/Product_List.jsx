@@ -38,7 +38,7 @@ const Product_List = () => {
           <select
             name="color"
             onChange={handleFilters}
-            className="p-2 m-0 mr-3 sm:mr-5 sm:m-5"
+            className="p-2 m-0 mr-3 sm:mr-5 sm:m-5 bg-[#dacaca]"
           >
             <option disabled>Color</option>
             <option>white</option>
@@ -52,7 +52,7 @@ const Product_List = () => {
           <select
             name="size"
             onChange={handleFilters}
-            className="p-2 m-0 sm:mr-5 sm:m-5"
+            className="p-2 m-0 sm:mr-5 sm:m-5 bg-[#dacaca]"
           >
             <option disabled>Size</option>
             <option>S</option>
@@ -65,7 +65,7 @@ const Product_List = () => {
           <span className="md:text-xl font-semibold mr-5 sm:mr-0">Sort Products:</span>
           <select
             onChange={(e) => setSort(e.target.value)}
-            className="p-2 m-0 sm:mr-5 sm:m-5"
+            className="p-2 m-0 sm:mr-5 sm:m-5 bg-[#dacaca]"
           >
             <option value="newest">Newest</option>
             <option value="asc">Price (asc)</option>

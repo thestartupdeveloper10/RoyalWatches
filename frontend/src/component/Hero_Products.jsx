@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/cartRedux";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { addProductWishlist } from '@/redux/wishlistRedux';
 
 const Hero_Products = ({ title,query }) => {
   const location = useLocation();
@@ -48,11 +50,14 @@ const Hero_Products = ({ title,query }) => {
          return (
             
             <Card key={product._id}>
+              
+              <div className="mb-4 bg-[#f7f8f2] relative">
+              <FavoriteBorderIcon onClick={()=>{dispatch(addProductWishlist({...product}))}} className="absolute top-3 left-3 md:top-6 md:left-6 text-gray-500 cursor-pointer"></FavoriteBorderIcon>
               <Link to={`/product/${product._id}`}>
-              <div className="mb-4 bg-[#f7f8f2]">
                 <img src={product.img} alt="" className="rounded-lg object-contain w-full h-[250px]" />
+                </Link>
               </div>
-              </Link>
+              
               <CardFooter className='-mb-3'>
                 <h1 className="font-bold text-start text-2xl">{product.title}</h1>
               </CardFooter>

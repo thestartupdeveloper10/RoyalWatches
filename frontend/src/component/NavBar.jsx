@@ -76,7 +76,7 @@ const NavBar = () => {
                   )}
                 </Button>
               </Link>
-              <Button onClick={handleLogout} className="px-2 md:px-3">Log out</Button>
+              <Button onClick={handleLogout} className="px-2 md:px-3 hidden md:block">Log out</Button>
             </>
           )}
         </div>
