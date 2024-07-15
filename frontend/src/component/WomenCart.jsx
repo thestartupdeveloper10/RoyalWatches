@@ -26,8 +26,8 @@ const WomenCart = ( {item} ) => {
                 </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                {item.map((item, index) => (
-                    <CardTemp key={index} item={item} />
+                {item.map((product, index) => (
+                    <CardTemp key={index} product={product} />
                 )).slice(0, 4)}
             </div>
         </div>

@@ -9,12 +9,16 @@ import CloseIcon from '@mui/icons-material/Close';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useState } from 'react';
 import { logout } from "../redux/userRedux";
+import {selectWishlistItems} from '../redux/wishlistRedux'
+import { selectCartItems } from '@/redux/cartRedux';
 
 const NavBar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const user = useSelector(state => state.user.currentUser);
-  const quantity = useSelector(state => state.cart.quantity);
-  const wishlistQuantity = useSelector(state => state.wishlist.quantity);
+  const userId= useSelector((state) => state.user.userId);
+  const {quantity} = useSelector(state => selectCartItems(state,userId));
+  const {wishQuantity} = useSelector(state => selectWishlistItems(state, userId));
+
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -59,9 +63,9 @@ const NavBar = () => {
               <Link to='/wishlist'>
                 <Button className="px-2 md:px-3 relative">
                   <FavoriteBorderIcon />
-                  {wishlistQuantity > 0 && (
+                  {wishQuantity > 0 && (
                     <div className="rounded-full h-7 w-7 bg-gray-500 flex justify-center items-center absolute -top-3 -right-2">
-                      <span>{wishlistQuantity}</span>
+                      <span>{wishQuantity}</span>
                     </div>
                   )}
                 </Button>

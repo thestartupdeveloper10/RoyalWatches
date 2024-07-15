@@ -5,24 +5,31 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { removeProduct, updateProductQuantity } from "../../redux/cartRedux";
 import DeleteIcon from '@mui/icons-material/Delete';
+// import { selectCartItems } from "../../redux/cartRedux";
+import { selectWishlistItems } from "@/redux/wishlistRedux";
 
 const Cart = () => {
+  const userId= useSelector((state) => state.user.userId);
   const cart = useSelector((state) => state.cart);
-  const wishlist = useSelector((state) => state.wishlist);
+  const wishlist = useSelector(state => selectWishlistItems(state, userId));
   const dispatch = useDispatch();
   const shippingFee= 100;
+ 
+
+  console.log(cart.carts[userId]);
+  console.log(wishlist.products.length)
 
   const handleQuantity = (type, productId) => {
-    const product = cart.products.find((item) => item._id === productId);
+    const product = cart.carts[userId].products.find((item) => item._id === productId);
     if (type === "dec" && product.quantity > 1) {
-      dispatch(updateProductQuantity({ id: productId, quantity: product.quantity - 1 }));
+      dispatch(updateProductQuantity({userId, productId, quantity: product.quantity - 1 }));
     } else if (type === "inc") {
-      dispatch(updateProductQuantity({ id: productId, quantity: product.quantity + 1 }));
+      dispatch(updateProductQuantity({userId, productId, quantity: product.quantity + 1 }));
     }
   };
 
   const handleRemove = (productId) => {
-    dispatch(removeProduct(productId));
+    dispatch(removeProduct({userId, productId}));
   };
 
   return (
@@ -36,7 +43,7 @@ const Cart = () => {
           </Link>
           <div className="hidden md:flex">
             <span className="text-sm underline cursor-pointer mr-4">
-              Shopping Bag({cart.products.length})
+              Shopping Bag({cart.carts[userId].products.length})
             </span>
             <span className="text-sm underline cursor-pointer">
               <Link to="/wishlist">
@@ -50,7 +57,7 @@ const Cart = () => {
         </div>
         <div className="flex flex-col md:flex-row justify-between w-full">
           <div className="flex-1 mr-4 w-full">
-            {cart.products.map((product) => (
+            {cart.carts[userId].products.map((product) => (
               <div className="flex flex-col lg:flex-row justify-between mb-4 bg-[#f7f2ef] py-3 px-3 rounded-md" key={product._id}>
                 <div className="flex">
                   <img src={product.img} alt={product.title} className="h-24 w-24 sm:w-32 sm:h-32 lg:h-48 lg:w-48 object-cover" />
@@ -77,7 +84,7 @@ const Cart = () => {
             <h2 className="text-xl font-light mb-4">ORDER SUMMARY</h2>
             <div className="flex justify-between mb-2">
               <span>Subtotal</span>
-              <span>$ {cart.total}</span>
+              <span>$ {cart.carts[userId].total}</span>
             </div>
             <div className="flex justify-between mb-2">
               <span>Estimated Shipping</span>
@@ -85,11 +92,11 @@ const Cart = () => {
             </div>
             <div className="flex justify-between mb-2">
               <span>Shipping Discount</span>
-              <span>{cart.total>100000?cart.total*0.05:0}</span>
+              <span>{cart.carts[userId].total>100000?cart.carts[userId].total*0.05:0}</span>
             </div>
             <div className="flex justify-between mb-4 font-semibold text-lg">
               <span>Total</span>
-              <span>{cart.total-(shippingFee+cart.total>100000?cart.total*0.05:0)}</span>
+              <span>{cart.carts[userId].total-(shippingFee+cart.carts[userId].total>100000?cart.carts[userId].total*0.05:0)}</span>
             </div>
             <button className="w-full py-2 bg-black text-white font-semibold">
               CHECKOUT NOW

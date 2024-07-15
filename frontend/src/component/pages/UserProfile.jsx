@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useSelector } from 'react-redux';
 import rolex from '../../assets/imgs/rolex.png';
 import Footer from '../Footer';
@@ -8,10 +9,14 @@ import { userRequest } from '@/service/requestMethods';
 const UserProfile = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [orders, setOrders] = useState([]);
+  const userId= useSelector((state) => state.user.userId);
+  console.log(currentUser);
+
+
 
   const getOrders = async () => {
     try {
-      const response = await userRequest.get(`/orders/find/${currentUser.id}`);
+      const response = await userRequest.get(`/orders/find/${userId}`);
       setOrders(response.data);
     } catch (error) {
       console.error("Failed to fetch orders:", error);

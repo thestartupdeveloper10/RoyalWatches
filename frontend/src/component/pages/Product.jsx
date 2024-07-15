@@ -4,7 +4,7 @@ import Footer from "../Footer";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { publicRequest } from "../../service/requestMethods";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { addProduct } from "../../redux/cartRedux";
 
 const Product = () => {
@@ -15,6 +15,7 @@ const Product = () => {
   const [size, setSize] = useState(""); // State to track selected size
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  const userId= useSelector((state) => state.user.userId);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -37,7 +38,7 @@ const Product = () => {
   };
 
   const handleClick = () => {
-    dispatch(addProduct({ ...product, quantity, color: selectedColor, size }));
+    dispatch(addProduct({userId, ...product, quantity, color: selectedColor, size }));
   };
 
   return (
