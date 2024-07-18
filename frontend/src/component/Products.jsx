@@ -3,7 +3,7 @@ import Single_product from './Single_product';
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-function Products({ cat, filters, sort }) {
+function Products({ cat, filters, sort, searchTerm }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -24,19 +24,27 @@ function Products({ cat, filters, sort }) {
   }, [cat]);
 
   useEffect(() => {
-    setFilteredProducts(
-      products.filter((item) =>
-        Object.entries(filters).every(([key, value]) =>
-          item[key].includes(value)
-        )
+    let tempProducts = products;
+
+    if (searchTerm) {
+      tempProducts = tempProducts.filter((item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    tempProducts = tempProducts.filter((item) =>
+      Object.entries(filters).every(([key, value]) =>
+        item[key].includes(value)
       )
     );
-  }, [products, filters]);
+
+    setFilteredProducts(tempProducts);
+  }, [products, filters, searchTerm]);
 
   useEffect(() => {
     if (sort === "newest") {
       setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => a.createdAt - b.createdAt)
+        [...prev].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
       );
     } else if (sort === "asc") {
       setFilteredProducts((prev) =>

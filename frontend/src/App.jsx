@@ -15,14 +15,16 @@ import Contact from './component/pages/Contact';
 import Wishlist from './component/pages/Wishlist';
 import UserProfile from './component/pages/UserProfile';
 import ProtectedRoute from './ProtectedRoute';
+import ScrollToTop from './ScrollToTop';
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
-  console.log(user);
+
 
   return (
     <>
       <Router>
+        <ScrollToTop/>
         <Routes>
           <Route path='/' element={<Hero/>}></Route>
           <Route path='/products' element={<Product_List/>}></Route>

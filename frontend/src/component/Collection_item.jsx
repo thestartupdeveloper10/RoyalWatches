@@ -17,9 +17,9 @@ function Collection_item({ item }) {
                 <div className="mb-4">
                     <img src={item.img} alt="" className="rounded-t-lg object-cover w-full h-full" />
                 </div>
-                <CardTitle className='mb-3'>{item.title}</CardTitle>
+                <CardTitle className='mb-3 text-center'>{item.title}</CardTitle>
                 <CardContent>
-                    <p className="capitalize text-[#8c8f8f] font-medium">{item.des}</p>
+                    <p className="capitalize  text-[#8c8f8f] font-medium">{item.des}</p>
                 </CardContent>
                 <CardFooter>
                 <Button className="w-full">{item.action}</Button>

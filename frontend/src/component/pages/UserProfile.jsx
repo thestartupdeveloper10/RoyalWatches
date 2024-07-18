@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useSelector } from 'react-redux';
-import rolex from '../../assets/imgs/rolex.png';
+import rolex from '../../assets/imgs/user.png';
 import Footer from '../Footer';
 import NavBar from '../NavBar';
 import { useEffect, useState } from 'react';
 import { userRequest } from '@/service/requestMethods';
+import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 const UserProfile = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -30,7 +32,12 @@ const UserProfile = () => {
   }, [currentUser]);
 
   if (!currentUser) {
-    return <div className="text-center py-8">Please log in to view your profile.</div>;
+    return <div className="text-center py-8 flex flex-col gap-5 h-full w-full justify-center items-center">
+      <h1>Please log in to view your profile.</h1>
+      <Link to="/login">
+      <Button>Login</Button>
+      </Link>
+    </div>;
   }
 
   return (
@@ -38,10 +45,10 @@ const UserProfile = () => {
       <NavBar />
       <div className="mt-16 sm:p-6 lg:p-8 w-full">
         <div className="bg-white shadow-lg rounded-lg overflow-hidden px-4 py-8 md:px-8 w-full">
-          <div className="md:flex">
+          <div className="flex flex-col justify-center items-center md:flex md:flex-row">
             <div className="md:flex-shrink-0">
               <img
-                className="h-48 w-full object-cover md:w-48"
+                className="md:h-48 h-24 w-24 object-cover md:w-48 rounded-full"
                 src={rolex}
                 alt={`${currentUser.username}`}
               />

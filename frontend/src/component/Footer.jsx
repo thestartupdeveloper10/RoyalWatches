@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+    const date = new Date();
+    const thisYear = date.getFullYear();
     return ( 
         <div>
            <section className="py-10 bg-black sm:pt-16 mt-10 lg:pt-24">
@@ -112,7 +114,7 @@ const Footer = () => {
 
         <hr className="mt-16 mb-10 border-gray-200" />
 
-        <p className="text-sm text-center text-white">© Copyright 2024, All Rights Reserved by RoyalWatches</p>
+    <p className="text-sm text-center text-white">© Copyright {thisYear}, All Rights Reserved by RoyalWatches</p>
     </div>
 </section>
         </div>

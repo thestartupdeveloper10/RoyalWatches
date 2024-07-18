@@ -49,7 +49,7 @@ const Product = () => {
           <div className="md:w-1/2 mb-4 sm:mb-0">
             <img
               src={product.img}
-              alt="Product"
+              alt='product img'
               className="w-full h-96 object-contain"
             />
           </div>

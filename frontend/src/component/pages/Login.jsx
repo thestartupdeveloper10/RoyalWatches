@@ -18,7 +18,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex-col flex justify-center w-full h-full items-center">
+    <div className="flex-col flex justify-center w-full h-[90dvh] items-center">
       <div className="wrapper bg-black">
         <div className="form-wrapper sign-in">
           <form onSubmit={handleClick}>

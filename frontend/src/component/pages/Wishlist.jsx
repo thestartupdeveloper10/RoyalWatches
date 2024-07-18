@@ -20,9 +20,6 @@ const Wishlist = () => {
         console.log(productId)
       };
 
-
-    console.log(wishlist)
-    console.log(userId)
     
     return ( 
         <>

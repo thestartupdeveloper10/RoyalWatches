@@ -31,13 +31,13 @@ function Hero_slider() {
 
 
     return (
-        <div className="hero-slider mx-5 md:mx-8">
+        <div className="hero-slider mx-5 md:mx-8  flex flex-col justify-center h-[40dvh] md:h-full">
             <Carousel>
                 <CarouselContent>
                     {products.map((item, index) => (
                         <CarouselItem key={index}>
                             <div className="grid lg:grid-cols-3 grid-cols-2 h-full">
-                                <div className="col-1 h-full w-full items-center flex justify-center flex-col pb-8 md:pb-0 px-2 md:px-0">
+                                <div className=" col-1 h-full w-full items-center flex justify-center flex-col pb-8 md:pb-0 px-2 md:px-0">
                                     <div className="flex justify-start flex-col  md:gap-10 gap-4">
                                         <div className="flex flex-col items-start gap-3">
                                             <h1 className="uppercase font-semibold md:text-2xl lg:text-4xl text-lg text-start">{item.title}</h1>
@@ -57,7 +57,7 @@ function Hero_slider() {
                                     </div>
                                 </div>
                                 <div className="col-2">
-                                    <img src={item.img} alt={item.title} className="h-full lg:object-cover object-contain" />
+                                    <img src={item.img} alt={item.title} className=" h-full lg:object-cover object-contain" />
                                 </div>
                                 <div className="col-3 lg:flex flex-col justify-center hidden">
                                     <div className="flex flex-col gap-4">
