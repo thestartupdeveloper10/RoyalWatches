@@ -18,7 +18,11 @@ export default defineConfig({
       external: [
         '@mui/icons-material',
         '@mui/material',
-        '@mui/icons-material/Delete'
+        '@mui/icons-material/Delete',
+        '@mui/icons-material/AddBox',
+        '@mui/icons-material/FavoriteBorder',
+        '@mui/icons-material/Add'
+
       ]
     }
   },
