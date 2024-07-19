@@ -21,7 +21,12 @@ export default defineConfig({
         '@mui/icons-material/Delete',
         '@mui/icons-material/AddBox',
         '@mui/icons-material/FavoriteBorder',
-        '@mui/icons-material/Add'
+        '@mui/icons-material/Add',
+        '@mui/icons-material/LocalMall',
+        '@mui/icons-material/Login',
+        '@mui/icons-material/Menu',
+        '@mui/icons-material/Close',
+        '@mui/icons-material/ArrowForward'
 
       ]
     }
