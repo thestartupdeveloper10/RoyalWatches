@@ -17,6 +17,7 @@ export default defineConfig({
     rollupOptions: {
       external: [
         '@mui/icons-material',
+        '@mui/material'
       ]
     }
   },
