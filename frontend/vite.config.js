@@ -17,7 +17,8 @@ export default defineConfig({
     rollupOptions: {
       external: [
         '@mui/icons-material',
-        '@mui/material'
+        '@mui/material',
+        '@mui/icons-material/Delete'
       ]
     }
   },
