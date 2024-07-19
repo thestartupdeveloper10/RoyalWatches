@@ -13,6 +13,13 @@ export default defineConfig({
   //     },
   //   }
   // },
+  build: {
+    rollupOptions: {
+      external: [
+        '@mui/material/utils',
+      ]
+    }
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
