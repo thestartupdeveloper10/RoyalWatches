@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "/api/";
+const BASE_URL = "https://royalwatches-backend.onrender.com/api/";
 
 
 const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
