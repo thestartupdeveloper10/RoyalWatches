@@ -2,10 +2,12 @@
 import Single_product from './Single_product';
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Single_Product_Skeleton from './Single_Product_Skeleton';
 
 function Products({ cat, filters, sort, searchTerm }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     const getProducts = async () => {
@@ -16,8 +18,10 @@ function Products({ cat, filters, sort, searchTerm }) {
             : "https://royalwatches-backend.onrender.com/api/products"
         );
         setProducts(res.data);
+        setLoading(false); // Set loading to false once data is fetched
       } catch (err) {
         console.log(err);
+        setLoading(false); // Set loading to false even if there's an error
       }
     };
     getProducts();
@@ -60,9 +64,12 @@ function Products({ cat, filters, sort, searchTerm }) {
   return (
     <div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-        {filteredProducts.map((product) => (
-          <Single_product product={product} key={product._id} />
-        ))}
+        {loading
+          ? Array.from({ length: 21 }, (_, index) => <Single_Product_Skeleton key={index} />)
+          : filteredProducts.map((product) => (
+              <Single_product product={product} key={product._id} />
+            ))
+        }
       </div>
     </div>
   );
