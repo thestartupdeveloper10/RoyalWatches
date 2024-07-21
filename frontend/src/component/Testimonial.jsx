@@ -4,10 +4,10 @@ export default function Testimonial() {
   return (
     <div>
         <section className="my-8 bg-[#f7f8f2]">
-	<div className="container flex flex-col items-center mx-auto mb-12 md:p-10 md:px-12">
+	<div className="container flex flex-col items-center mx-auto mb-4 md:p-10  md:px-12">
 		<h1 className="p-4 text-4xl font-semibold leading-none text-center">What our customers are saying about us</h1>
 	</div>
-	<div className="container flex flex-col items-center justify-center mx-auto lg:flex-row lg:flex-wrap lg:justify-evenly lg:px-10">
+	<div className="container grid grid-cols-1 md:grid-cols-2 gap-5 mx-auto lg:flex-row lg:flex-wrap lg:justify-evenly lg:px-10">
 		<div className="flex flex-col w-full md:mx-4 my-6 shadow-lg bg-white">
 			<div className="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 dark:bg-gray-50">
 				<p className="relative px-6 py-1 text-lg italic text-center dark:text-gray-800">
@@ -23,7 +23,7 @@ export default function Testimonial() {
 				</p>
 			</div>
 			<div className="flex flex-col items-center justify-center p-8 rounded-b-lg dark:bg-violet-600 dark:text-gray-50">
-				<img src="https://source.unsplash.com/50x50/?portrait?1" alt="Customer 1" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full dark:bg-gray-500 dark:bg-gray-300" />
+				<img src="https://cdn.pixabay.com/photo/2022/05/21/06/52/standup-paddleboarding-7210815_960_720.jpg" alt="Customer 1" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full object-cover dark:bg-gray-500 dark:bg-gray-300" />
 				<p className="text-xl font-semibold leading-tight">Alex Johnson</p>
 				<p className="text-sm uppercase">Satisfied Customer</p>
 			</div>
@@ -43,8 +43,8 @@ export default function Testimonial() {
 				</p>
 			</div>
 			<div className="flex flex-col items-center justify-center p-8 rounded-b-lg dark:bg-violet-600 dark:text-gray-50">
-				<img src="https://source.unsplash.com/50x50/?portrait?2" alt="Customer 2" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full dark:bg-gray-500 dark:bg-gray-300" />
-				<p className="text-xl font-semibold leading-tight">Emily Davis</p>
+				<img src="https://cdn.pixabay.com/photo/2018/10/15/16/16/man-3749344_960_720.jpg" alt="Customer 2" className="w-16 h-16 mb-2 object-cover -mt-16 bg-center bg-cover rounded-full dark:bg-gray-500 dark:bg-gray-300" />
+				<p className="text-xl font-semibold leading-tight">Max Davis</p>
 				<p className="text-sm uppercase">Loyal Patron</p>
 			</div>
 		</div>
@@ -63,7 +63,7 @@ export default function Testimonial() {
 				</p>
 			</div>
 			<div className="flex flex-col items-center justify-center p-8 rounded-b-lg dark:bg-violet-600 dark:text-gray-50">
-				<img src="https://source.unsplash.com/50x50/?portrait?3" alt="Customer 3" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full dark:bg-gray-500 dark:bg-gray-300" />
+				<img src="https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg" alt="Customer 3" className="w-16 h-16 mb-2 object-cover -mt-16 bg-center bg-cover rounded-full dark:bg-gray-500 dark:bg-gray-300" />
 				<p className="text-xl font-semibold leading-tight">Michael Brown</p>
 				<p className="text-sm uppercase">Happy Client</p>
 			</div>
@@ -83,7 +83,7 @@ export default function Testimonial() {
 				</p>
 			</div>
 			<div className="flex flex-col items-center justify-center p-8 rounded-b-lg dark:bg-violet-600 dark:text-gray-50">
-				<img src="https://source.unsplash.com/50x50/?portrait?4" alt="Customer 4" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full dark:bg-gray-500 dark:bg-gray-300" />
+				<img src="https://cdn.pixabay.com/photo/2023/07/30/09/12/red-hair-girl-8158373_960_720.jpg" alt="Customer 4" className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full object-cover dark:bg-gray-500 dark:bg-gray-300" />
 				<p className="text-xl font-semibold leading-tight">Sarah Wilson</p>
 				<p className="text-sm uppercase">Delighted Shopper</p>
 			</div>

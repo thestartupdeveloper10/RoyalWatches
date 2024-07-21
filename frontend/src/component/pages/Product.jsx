@@ -7,6 +7,7 @@ import { publicRequest } from "../../service/requestMethods";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../redux/cartRedux";
 import Product_Skeleton from "../Product_Skeleton";
+import SimilarProducts from "../SimilarProducts";
 
 const Product = () => {
   const location = useLocation();
@@ -33,6 +34,9 @@ const Product = () => {
     getProduct();
   }, [id]);
 
+ 
+  
+
   const handleQuantity = (type) => {
     if (type === "dec") {
       quantity > 1 && setQuantity(quantity - 1);
@@ -44,6 +48,8 @@ const Product = () => {
   const handleClick = () => {
     dispatch(addProduct({ userId, ...product, quantity, color: selectedColor, size }));
   };
+
+ 
 
   return (
     <>
@@ -122,6 +128,10 @@ const Product = () => {
             </div>
           </div>
         )}
+        <div className="mx-10">
+        <SimilarProducts product={product}/>
+        </div>
+        
       </div>
       <Footer />
     </>
