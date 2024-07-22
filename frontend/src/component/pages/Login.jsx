@@ -51,7 +51,7 @@ const Login = () => {
               className={`sign-btn ${isFetching ? "not-allowed" : ""}`}
               disabled={isFetching}
             >
-              Sign In
+              {isFetching ? "Signing in..." : "Sign In"}
             </button>
             {error && <div className="text-red-700 mt-3">Something went wrong...</div>}
             <div className="signUp-link">

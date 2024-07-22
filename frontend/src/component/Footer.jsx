@@ -42,7 +42,7 @@ const Footer = () => {
                         </a>
                     </li>
 
-                    <li>
+                    {/* <li>
                         <a href="#" title="" className="flex items-center justify-center text-white transition-all duration-200  rounded-full w-7 h-7 hover:bg-gray-400 focus:bg-blue-600">
                             <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -50,7 +50,7 @@ const Footer = () => {
                                 ></path>
                             </svg>
                         </a>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
 
@@ -59,15 +59,15 @@ const Footer = () => {
 
                 <ul className="mt-6 space-y-4">
                     <li>
-                        <a href="#" title="" className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> About </a>
+                        <Link to='/about' className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> About </Link>
                     </li>
 
                     <li>
-                        <a href="#" title="" className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> Features </a>
+                        <Link to='/features' title="" className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> Features </Link>
                     </li>
 
                     <li>
-                        <a href="#" title="" className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> Works </a>
+                        <Link to='/instructions' title="" className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> Works </Link>
                     </li>
 
                     <li>
@@ -85,15 +85,11 @@ const Footer = () => {
                     </li>
 
                     <li>
-                        <a href="#" title="" className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> Delivery Details </a>
+                        <Link to='/delivery' title="" className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> Delivery Details </Link>
                     </li>
 
                     <li>
-                        <a href="#" title="" className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> Terms & Conditions </a>
-                    </li>
-
-                    <li>
-                        <a href="#" title="" className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> Privacy Policy </a>
+                        <Link to='/terms' title="" className="flex text-base text-white transition-all duration-200 hover:text-gray-400 focus:text-gray-300"> Terms & Conditions </Link>
                     </li>
                 </ul>
             </div>

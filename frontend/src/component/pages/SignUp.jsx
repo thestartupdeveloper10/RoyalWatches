@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/apiCalls';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import './Login.css';
 
@@ -9,11 +9,18 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (username && email && password) {
-      register(dispatch, { username, email, password });
+      try {
+        await register(dispatch, { username, email, password }); // Assuming register returns a promise
+        navigate('/login'); // Navigate to login page upon successful registration
+      } catch (error) {
+        console.error('Registration failed:', error);
+        // Optionally, handle registration failure
+      }
     }
   };
 
