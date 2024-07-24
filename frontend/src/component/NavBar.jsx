@@ -46,7 +46,7 @@ const NavBar = () => {
           </Button>
         </div>
         <div>
-          <Link to="/" className="text-lg md:text-2xl font-bold ">RoyalWatches</Link>
+          <Link to="/" className="text-lg font-serif md:text-2xl font-bold ">RoyalWatches</Link>
         </div>
         <div className="flex justify-end gap-2 items-center w-full">
           <Link to={user ? "/userprofile" : "/login"}>

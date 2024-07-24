@@ -19,7 +19,7 @@ const Login = () => {
 
   return (
     <div className="flex-col flex justify-center w-full h-[90dvh] items-center">
-      <div className="wrapper bg-black">
+      <div className="wrapper flex items-center justify-center bg-black">
         <div className="form-wrapper sign-in">
           <form onSubmit={handleClick}>
             <h2>Sign In</h2>

@@ -16,6 +16,8 @@ const Hero_Products = ({ title, query }) => {
   const id = location.pathname.split("/")[2];
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
+  const [favorites, setFavorites] = useState({}); // State to track favorites
+  const [addedToCart, setAddedToCart] = useState({}); // State to track cart additions
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.userId);
 
@@ -33,6 +35,20 @@ const Hero_Products = ({ title, query }) => {
     getProduct();
   }, [id, query, title]);
 
+  const handleFavoriteClick = (productId) => {
+    setFavorites((prevFavorites) => ({
+      ...prevFavorites,
+      [productId]: !prevFavorites[productId],
+    }));
+  };
+
+  const handleAddToCartClick = (productId) => {
+    setAddedToCart((prevAddedToCart) => ({
+      ...prevAddedToCart,
+      [productId]: !prevAddedToCart[productId],
+    }));
+  };
+
   return (
     <div>
       <div className="md:mt-20 mt-8">
@@ -49,14 +65,18 @@ const Hero_Products = ({ title, query }) => {
               const quantity = 1;
               const color = product.color[0];
               const size = product.size[0];
+              const isFavorite = favorites[product._id];
+              const isAddedToCart = addedToCart[product._id];
+
               return (
                 <Card key={product._id}>
                   <div className="mb-4 bg-[#f7f8f2] relative">
                     <FavoriteBorderIcon
                       onClick={() => {
                         dispatch(addProductWishlist({ userId, product }));
+                        handleFavoriteClick(product._id);
                       }}
-                      className="absolute top-3 left-3 md:top-6 md:left-6 text-gray-500 cursor-pointer"
+                      className={`absolute top-3 left-3 md:top-6 md:left-6 cursor-pointer ${isFavorite ? 'text-red-600' : 'text-gray-500'}`}
                     />
                     <Link to={`/product/${product._id}`}>
                       <img
@@ -84,8 +104,9 @@ const Hero_Products = ({ title, query }) => {
                     <AddBoxIcon
                       onClick={() => {
                         dispatch(addProduct({ userId, ...product, quantity, color, size }));
+                        handleAddToCartClick(product._id);
                       }}
-                      className="cursor-pointer"
+                      className={`cursor-pointer ${isAddedToCart ? 'text-green-600' : 'text-gray-500'}`}
                     />
                   </CardFooter>
                 </Card>
