@@ -1,117 +1,412 @@
 import { useState } from "react";
-import Footer from "../Footer";
 import NavBar from "../NavBar";
+import Footer from "../Footer";
+import { motion, AnimatePresence } from "framer-motion";
+import { MapPin, Phone, Mail, Clock, ArrowRight, Check } from "lucide-react";
+
+const CONTACT_DETAILS = [
+  { icon: MapPin,  label: "Address",        value: "Box 9999, Nairobi, Kenya" },
+  { icon: Phone,   label: "Phone",          value: "+254 712 3355" },
+  { icon: Mail,    label: "Email",          value: "support@royalwatches.com" },
+  { icon: Clock,   label: "Business Hours", value: "Mon – Sat, 9 am – 6 pm EAT" },
+];
+
+const InputField = ({ label, name, type = "text", value, onChange, placeholder, required }) => (
+  <div className="flex flex-col gap-1.5">
+    <label
+      style={{
+        fontSize: "0.6875rem",
+        letterSpacing: "0.08em",
+        textTransform: "uppercase",
+        color: "var(--rw-muted)",
+        fontFamily: "'Outfit', sans-serif",
+      }}
+    >
+      {label}
+    </label>
+    <input
+      type={type}
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      required={required}
+      style={{
+        height: "48px",
+        background: "var(--rw-elevated)",
+        border: "1px solid var(--rw-border)",
+        borderRadius: "0.625rem",
+        padding: "0 14px",
+        fontSize: "0.9375rem",
+        color: "var(--rw-text)",
+        fontFamily: "'Outfit', sans-serif",
+        outline: "none",
+        transition: "border-color 200ms ease",
+        width: "100%",
+      }}
+      onFocus={e => (e.target.style.borderColor = "var(--rw-gold)")}
+      onBlur={e  => (e.target.style.borderColor = "var(--rw-border)")}
+    />
+  </div>
+);
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm]           = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError]         = useState("");
 
-  const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = e => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
-      setError("All fields are required.");
+      setError("Please fill in all fields.");
       return;
     }
-    // TODO: wire to backend contact endpoint
     setSubmitted(true);
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: "var(--rw-bg)", minHeight: "100vh" }}>
       <NavBar />
-      <section className="py-6 dark:bg-gray-100 dark:text-gray-900 md:mt-20 mt-8">
-        <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
-          <div className="py-6 md:py-0 md:px-6">
-            <h1 className="text-4xl font-bold text-start">Get in touch</h1>
-            <p className="pt-2 pb-4 text-start">Fill in the form to start a conversation</p>
-            <div className="space-y-4">
-              <p className="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-2 sm:mr-6">
-                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                </svg>
-                <span>Box, 9999 Nairobi</span>
-              </p>
-              <p className="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-2 sm:mr-6">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-                <span>2547123355</span>
-              </p>
-              <p className="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-2 sm:mr-6">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-                <span>support@royalwatches.com</span>
-              </p>
-            </div>
-          </div>
 
-          {submitted ? (
-            <div className="flex flex-col items-center justify-center py-10 px-6 gap-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-              <h2 className="text-xl font-semibold">Message sent!</h2>
-              <p className="text-gray-600 text-center">We&apos;ll get back to you within 24 hours.</p>
-            </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col py-6 bg-[#e1ddd2] px-3 md:py-10 space-y-6 rounded-md md:px-6"
-            >
-              <label className="block">
-                <span className="mb-1 font-bold">Full name</span>
-                <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  placeholder="Leroy Jenkins"
-                  className="block mt-2 w-full h-9 px-2 shadow-sm focus:ring focus:ring-opacity-75 dark:bg-gray-100"
-                  required
-                />
-              </label>
-              <label className="block">
-                <span className="mb-1 font-bold">Email address</span>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder="leroy@jenkins.com"
-                  className="block mt-2 w-full h-9 px-2 shadow-sm focus:ring focus:ring-opacity-75 dark:bg-gray-100"
-                  required
-                />
-              </label>
-              <label className="block">
-                <span className="mb-1 font-bold">Message</span>
-                <textarea
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  rows="3"
-                  className="block w-full mt-2 px-2 focus:ring focus:ring-opacity-75 dark:bg-gray-100"
-                  required
-                />
-              </label>
-              {error && <p className="text-red-600 text-sm">{error}</p>}
-              <button
-                type="submit"
-                className="bg-[#bfbbaf] self-center px-8 py-3 text-lg rounded focus:ring hover:ring focus:ring-opacity-75 hover:bg-black hover:text-white transition"
+      {/* ── Hero ─────────────────────────────────────────────── */}
+      <div className="rw-container" style={{ paddingTop: "120px", paddingBottom: "56px" }}>
+        <motion.div
+          className="flex flex-col items-center text-center gap-4"
+          initial="hidden"
+          animate="show"
+          variants={{ show: { transition: { staggerChildren: 0.1 } } }}
+        >
+          <motion.span
+            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+            className="rw-section-label"
+          >
+            Reach Out
+          </motion.span>
+          <motion.h1
+            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+            className="font-display font-light"
+            style={{
+              fontSize: "clamp(3rem, 8vw, 6rem)",
+              color: "var(--rw-text)",
+              letterSpacing: "-0.03em",
+              lineHeight: 0.95,
+            }}
+          >
+            Get in <span style={{ color: "var(--rw-gold)" }}>Touch</span>
+          </motion.h1>
+          <motion.p
+            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+            style={{
+              maxWidth: "480px",
+              color: "var(--rw-muted)",
+              fontFamily: "'Outfit', sans-serif",
+              fontSize: "1rem",
+              lineHeight: 1.7,
+            }}
+          >
+            Our team of specialists is ready to help you find the perfect timepiece or answer any questions.
+          </motion.p>
+        </motion.div>
+      </div>
+
+      {/* ── Divider ──────────────────────────────────────────── */}
+      <div className="rw-container">
+        <div style={{ height: "1px", backgroundColor: "var(--rw-border)" }} />
+      </div>
+
+      {/* ── Content ──────────────────────────────────────────── */}
+      <div className="rw-container" style={{ paddingTop: "80px", paddingBottom: "80px" }}>
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
+
+          {/* ── Left: contact info ─────────────────────────── */}
+          <motion.div
+            className="lg:w-2/5 flex flex-col gap-8"
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+          >
+            <div className="flex flex-col gap-3">
+              <span className="rw-section-label">Contact Details</span>
+              <h2
+                className="font-display font-light"
+                style={{
+                  fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                  color: "var(--rw-text)",
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1,
+                }}
               >
-                Submit
-              </button>
-            </form>
-          )}
+                We'd love to hear from you
+              </h2>
+              <p
+                style={{
+                  color: "var(--rw-muted)",
+                  fontFamily: "'Outfit', sans-serif",
+                  fontSize: "0.9375rem",
+                  lineHeight: 1.7,
+                }}
+              >
+                Fill in the form and one of our specialists will respond within 24 hours.
+              </p>
+            </div>
+
+            <div style={{ height: "1px", backgroundColor: "var(--rw-border)" }} />
+
+            {/* Decorative quote */}
+            <div
+              style={{
+                borderLeft: "2px solid var(--rw-gold)",
+                paddingLeft: "1.25rem",
+              }}
+            >
+              <p
+                className="font-display font-light"
+                style={{
+                  fontSize: "1.25rem",
+                  color: "var(--rw-text)",
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1.4,
+                  opacity: 0.7,
+                }}
+              >
+                "A timepiece is more than an instrument — it is a statement. We're here to help you make the right one."
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              {CONTACT_DETAILS.map(({ icon: Icon, label, value }) => (                <div key={label} className="flex items-start gap-4">
+                  <div
+                    style={{
+                      width: "2.5rem",
+                      height: "2.5rem",
+                      borderRadius: "0.625rem",
+                      backgroundColor: "var(--rw-elevated)",
+                      border: "1px solid var(--rw-border)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Icon className="w-4 h-4" style={{ color: "var(--rw-gold)" }} />
+                  </div>
+                  <div className="flex flex-col gap-0.5">
+                    <span
+                      style={{
+                        fontFamily: "'Outfit', sans-serif",
+                        fontSize: "0.6875rem",
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        color: "var(--rw-muted)",
+                      }}
+                    >
+                      {label}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "'Outfit', sans-serif",
+                        fontSize: "0.9375rem",
+                        color: "var(--rw-text)",
+                      }}
+                    >
+                      {value}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* ── Right: form ────────────────────────────────── */}
+          <motion.div
+            className="lg:w-3/5"
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+          >
+            <div
+              style={{
+                backgroundColor: "var(--rw-surface)",
+                border: "1px solid var(--rw-border)",
+                borderRadius: "1.25rem",
+                padding: "clamp(1.5rem, 4vw, 2.5rem)",
+              }}
+            >
+              <AnimatePresence mode="wait">
+                {submitted ? (
+                  /* Success state */
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                    className="flex flex-col items-center text-center gap-6 py-12"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.15, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                      style={{
+                        width: "5rem",
+                        height: "5rem",
+                        borderRadius: "50%",
+                        backgroundColor: "var(--rw-elevated)",
+                        border: "1px solid var(--rw-border)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Check className="w-7 h-7" style={{ color: "var(--rw-gold)" }} />
+                    </motion.div>
+                    <div className="flex flex-col gap-2">
+                      <h2
+                        className="font-display font-light"
+                        style={{ fontSize: "2rem", color: "var(--rw-text)", letterSpacing: "-0.02em" }}
+                      >
+                        Message Sent
+                      </h2>
+                      <p
+                        style={{
+                          color: "var(--rw-muted)",
+                          fontFamily: "'Outfit', sans-serif",
+                          fontSize: "0.9375rem",
+                          lineHeight: 1.6,
+                        }}
+                      >
+                        Thank you for reaching out. We'll get back to you within 24 hours.
+                      </p>
+                    </div>
+                    <motion.button
+                      onClick={() => { setSubmitted(false); setForm({ name: "", email: "", message: "" }); }}
+                      whileTap={{ scale: 0.97 }}
+                      className="rw-btn-ghost"
+                    >
+                      Send another message
+                    </motion.button>
+                  </motion.div>
+                ) : (
+                  /* Form */
+                  <motion.form
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    onSubmit={handleSubmit}
+                    className="flex flex-col gap-5"
+                  >
+                    <div className="mb-1">
+                      <span className="rw-section-label" style={{ display: "block", marginBottom: "0.5rem" }}>
+                        Send a message
+                      </span>
+                      <h2
+                        className="font-display font-light"
+                        style={{ fontSize: "1.75rem", color: "var(--rw-text)", letterSpacing: "-0.02em" }}
+                      >
+                        Start the conversation
+                      </h2>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <InputField
+                        label="Full Name"
+                        name="name"
+                        value={form.name}
+                        onChange={handleChange}
+                        placeholder="John Smith"
+                        required
+                      />
+                      <InputField
+                        label="Email Address"
+                        name="email"
+                        type="email"
+                        value={form.email}
+                        onChange={handleChange}
+                        placeholder="john@example.com"
+                        required
+                      />
+                    </div>
+
+                    {/* Message textarea */}
+                    <div className="flex flex-col gap-1.5">
+                      <label
+                        style={{
+                          fontSize: "0.6875rem",
+                          letterSpacing: "0.08em",
+                          textTransform: "uppercase",
+                          color: "var(--rw-muted)",
+                          fontFamily: "'Outfit', sans-serif",
+                        }}
+                      >
+                        Message
+                      </label>
+                      <textarea
+                        name="message"
+                        value={form.message}
+                        onChange={handleChange}
+                        rows={6}
+                        placeholder="Tell us how we can help you…"
+                        required
+                        style={{
+                          background: "var(--rw-elevated)",
+                          border: "1px solid var(--rw-border)",
+                          borderRadius: "0.625rem",
+                          padding: "12px 14px",
+                          fontSize: "0.9375rem",
+                          color: "var(--rw-text)",
+                          fontFamily: "'Outfit', sans-serif",
+                          outline: "none",
+                          transition: "border-color 200ms ease",
+                          width: "100%",
+                          resize: "vertical",
+                        }}
+                        onFocus={e => (e.target.style.borderColor = "var(--rw-gold)")}
+                        onBlur={e  => (e.target.style.borderColor = "var(--rw-border)")}
+                      />
+                    </div>
+
+                    {error && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        style={{
+                          fontSize: "0.8125rem",
+                          color: "#f87171",
+                          fontFamily: "'Outfit', sans-serif",
+                        }}
+                      >
+                        {error}
+                      </motion.p>
+                    )}
+
+                    <motion.button
+                      type="submit"
+                      whileTap={{ scale: 0.97 }}
+                      className="rw-btn-primary self-start"
+                    >
+                      Send Message
+                      <ArrowRight className="w-4 h-4" />
+                    </motion.button>
+                  </motion.form>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
         </div>
-      </section>
+      </div>
+
       <Footer />
     </div>
   );

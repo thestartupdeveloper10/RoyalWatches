@@ -87,21 +87,22 @@ const CheckoutModal = ({ isOpen, onClose }) => {
             style={{ backgroundColor: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(8px)' }}
             onClick={handleClose}
           />
+          <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+            style={{ pointerEvents: 'none' }}
+          >
           <motion.div
             key="modal"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
             transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-            className="fixed z-[9999]"
             style={{
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: 'calc(100% - 2rem)',
+              width: '100%',
               maxWidth: '560px',
               maxHeight: '92vh',
               overflowY: 'auto',
+              pointerEvents: 'auto',
             }}
           >
             <div
@@ -285,6 +286,7 @@ const CheckoutModal = ({ isOpen, onClose }) => {
               </AnimatePresence>
             </div>
           </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>
