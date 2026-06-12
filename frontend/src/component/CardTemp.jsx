@@ -1,62 +1,181 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import AddIcon from '@mui/icons-material/Add';
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../redux/cartRedux";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Heart, Check, Plus } from 'lucide-react';
+import { addProduct } from '../redux/cartRedux';
 import { addProductWishlist } from '@/redux/wishlistRedux';
 
 const CardTemp = ({ product }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const [cartState, setCartState] = useState('idle'); // idle | added
+  const [hovered, setHovered] = useState(false);
+
   const dispatch = useDispatch();
-  const quantity = 1;
-  const color = product.color[0];
-  const size = product.size[0];
-  const userId = useSelector((state) => state.user.userId);
+  const userId = useSelector(state => state.user.userId);
 
-  const handleFavoriteClick = () => {
+  const handleWishlist = e => {
+    e.preventDefault();
     dispatch(addProductWishlist({ userId, product }));
-    setIsFavorite(!isFavorite);
+    setIsFavorite(f => !f);
   };
 
-  const handleAddToCartClick = () => {
-    dispatch(addProduct({ userId, ...product, quantity, color, size }));
-    setIsAddedToCart(!isAddedToCart);
+  const handleAddToCart = e => {
+    e.preventDefault();
+    if (cartState === 'added') return;
+    dispatch(addProduct({
+      userId,
+      ...product,
+      quantity: 1,
+      color: product.color[0],
+      size: product.size[0],
+    }));
+    setCartState('added');
+    setTimeout(() => setCartState('idle'), 2200);
   };
+
+  const imgSrc = product.images?.[0] || product.img;
 
   return (
-    <Card>
-      <div className="mb-4 bg-[#f7f8f2] relative">
-        <FavoriteBorderIcon
-          onClick={handleFavoriteClick}
-          className={`absolute top-3 left-3 md:top-6 md:left-6 cursor-pointer ${isFavorite ? 'text-red-600' : 'text-gray-500'}`}
+    <motion.article
+      className="group relative flex flex-col overflow-hidden"
+      style={{
+        backgroundColor: 'var(--rw-surface)',
+        border: '1px solid var(--rw-border)',
+        borderRadius: '1rem',
+      }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
+    >
+      {/* Image */}
+      <Link to={`/product/${product._id}`} className="relative overflow-hidden block" style={{ aspectRatio: '4/5', backgroundColor: 'var(--rw-elevated)' }}>
+        <img
+          src={imgSrc}
+          alt={product.title}
+          className="w-full h-full object-cover transition-transform duration-700"
+          style={{
+            outline: '1px solid rgba(0,0,0,0.05)',
+            transform: hovered ? 'scale(1.04)' : 'scale(1)',
+            transition: 'transform 700ms cubic-bezier(0.23, 1, 0.32, 1)',
+          }}
         />
-        <Link to={`/product/${product._id}`}>
-          <img src={product.img} alt="" className="rounded-lg object-contain w-full h-[200px]" />
-        </Link>
-      </div>
 
-      <CardFooter className='-mb-3'>
-        <h1 className="font-bold text-start text-xl">{product.title}</h1>
-      </CardFooter>
-      <CardContent>
-        <p className="capitalize text-[#8c8f8f] font-medium text-sm text-start">{product.desc.split(".")[0]}</p>
-      </CardContent>
-      <CardFooter className='flex justify-between'>
-        <h1 className="font-bold text-xl text-start"><span className="pr-2">$</span>{product.price}</h1>
-        <AddIcon
-          onClick={handleAddToCartClick}
-          className={`cursor-pointer ${isAddedToCart ? 'text-green-600' : 'text-gray-500'}`}
-        />
-      </CardFooter>
-    </Card>
+        {/* Wishlist button — appears on hover */}
+        <motion.button
+          onClick={handleWishlist}
+          className="absolute top-3 right-3 flex items-center justify-center"
+          style={{
+            width: '2rem',
+            height: '2rem',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(8,8,8,0.55)',
+            backdropFilter: 'blur(8px)',
+            border: 'none',
+            cursor: 'pointer',
+            color: isFavorite ? '#ef4444' : 'rgba(255,255,255,0.85)',
+          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.8 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+          whileTap={{ scale: 0.9 }}
+          aria-label={isFavorite ? 'Remove from wishlist' : 'Add to wishlist'}
+        >
+          <Heart
+            className="w-3.5 h-3.5"
+            style={{ fill: isFavorite ? '#ef4444' : 'none' }}
+          />
+        </motion.button>
+      </Link>
+
+      {/* Info */}
+      <div className="flex flex-col gap-1 p-4">
+        <Link to={`/product/${product._id}`} style={{ textDecoration: 'none' }}>
+          <h3
+            className="font-display font-light leading-snug transition-colors duration-200"
+            style={{
+              fontSize: '1.125rem',
+              color: hovered ? 'var(--rw-gold)' : 'var(--rw-text)',
+              transition: 'color 200ms ease',
+            }}
+          >
+            {product.title}
+          </h3>
+        </Link>
+        <p
+          className="text-xs line-clamp-1"
+          style={{ color: 'var(--rw-muted)', fontFamily: "'Outfit', sans-serif" }}
+        >
+          {product.desc?.split('.')[0]}
+        </p>
+
+        <div className="flex items-center justify-between mt-3">
+          <span
+            className="font-medium"
+            style={{
+              color: 'var(--rw-text)',
+              fontFamily: "'Outfit', sans-serif",
+              fontVariantNumeric: 'tabular-nums',
+              fontSize: '1rem',
+            }}
+          >
+            ${product.price}
+          </span>
+
+          <motion.button
+            onClick={handleAddToCart}
+            whileTap={{ scale: 0.94 }}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.375rem',
+              padding: '0.375rem 0.875rem',
+              borderRadius: '0.5rem',
+              border: 'none',
+              cursor: cartState === 'added' ? 'default' : 'pointer',
+              fontFamily: "'Outfit', sans-serif",
+              fontSize: '0.6875rem',
+              fontWeight: 500,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              backgroundColor: cartState === 'added' ? 'var(--rw-gold)' : 'var(--rw-elevated)',
+              color: cartState === 'added' ? '#fff' : 'var(--rw-text)',
+              transition: 'background-color 250ms ease, color 250ms ease',
+            }}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {cartState === 'added' ? (
+                <motion.span
+                  key="check"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  className="flex items-center gap-1"
+                  transition={{ duration: 0.15 }}
+                >
+                  <Check className="w-3 h-3" />
+                  Added
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="add"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  className="flex items-center gap-1"
+                  transition={{ duration: 0.15 }}
+                >
+                  <Plus className="w-3 h-3" />
+                  Add
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
+        </div>
+      </div>
+    </motion.article>
   );
 };
 

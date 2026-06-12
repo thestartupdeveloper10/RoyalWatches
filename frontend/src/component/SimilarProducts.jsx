@@ -1,19 +1,13 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { publicRequest } from "../service/requestMethods";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import SimilarProduct_Skeleton from "./SimilarProduct_Skeleton";
+import { motion } from "framer-motion";
+import Single_product from "./Single_product";
+import Single_Product_Skeleton from "./Single_Product_Skeleton";
 
 export default function SimilarProducts({ product }) {
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (product && product.categories && product.categories.length >= 2) {
@@ -26,56 +20,69 @@ export default function SimilarProducts({ product }) {
           if (mainCategory === "Men" || mainCategory === "Women") {
             res = await publicRequest.get(`/products?category=${mainCategory}`);
           }
-
           if (res) {
-            const allProducts = res.data;
-
-            const filtered = allProducts.filter((prod) => {
-              if (prod.categories && Array.isArray(prod.categories)) {
-                return prod.categories.includes(similarCategory);
-              } else {
-                console.warn(`Product ID: ${prod._id} does not have a valid categories array.`);
-                return false;
-              }
-            });
-
-            setFilteredProducts(filtered);
+            const filtered = res.data.filter(
+              (prod) =>
+                prod._id !== product._id &&
+                prod.categories?.includes(similarCategory)
+            );
+            setFilteredProducts(filtered.slice(0, 8));
           }
         } catch (err) {
           console.error(err);
+        } finally {
+          setLoading(false);
         }
       };
       getProducts();
+    } else {
+      setLoading(false);
     }
   }, [product]);
-  
+
+  if (!loading && filteredProducts.length === 0) return null;
 
   return (
-    <div className="mt-10 md:mt-28">
-      <div className="mt-10 flex flex-col w-full justify-center items-center gap-3 lg:gap-6 lg:mb-10 mb-8">
-        <h1 className="font-extrabold lg:text-[56px] md:text-[36px] text-2xl text-gray-800">
-          Similar Products
-        </h1>
+    <section className="py-16">
+      {/* Header */}
+      <div className="flex flex-col items-center gap-3 mb-12 text-center">
+        <span className="rw-section-label" style={{ color: "var(--rw-gold)" }}>
+          You May Also Like
+        </span>
+        <h2
+          className="font-display font-light"
+          style={{
+            fontSize: "clamp(2rem, 5vw, 3.5rem)",
+            color: "var(--rw-text)",
+            letterSpacing: "-0.02em",
+            lineHeight: 0.95,
+          }}
+        >
+          Similar Pieces
+        </h2>
       </div>
-      {filteredProducts.length > 0 ? (
-        <Carousel>
-          <CarouselContent>
-            {filteredProducts.map((item, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 py-4 lg:basis-1/3 -mx-2 md:-mx-4">
-                <Link to={`/product/${item._id}`}>
-                  <img src={item.img} alt={item.title} className="w-full h-48 object-contain" />
-                </Link>
-                <h2 className="mt-2 text-xl font-semibold">{item.title}</h2>
-                <p className="text-sm md:text-md font-bold">$ {item.price}</p>
-              </CarouselItem>
+
+      {/* Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {loading
+          ? Array.from({ length: 4 }).map((_, i) => (
+              <Single_Product_Skeleton key={i} />
+            ))
+          : filteredProducts.map((item, index) => (
+              <motion.div
+                key={item._id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.07,
+                  ease: [0.23, 1, 0.32, 1],
+                }}
+              >
+                <Single_product product={item} />
+              </motion.div>
             ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-      ) : (
-        <SimilarProduct_Skeleton />
-      )}
-    </div>
+      </div>
+    </section>
   );
 }

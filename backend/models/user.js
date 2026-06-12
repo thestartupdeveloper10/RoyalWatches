@@ -1,32 +1,34 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-  username: {       
+  username: {
     type: String,
     required: true,
-    unique: true // this ensures the uniqueness of username  
-    },
-  email: {       
+    unique: true,
+  },
+  email: {
     type: String,
     required: true,
-    unique: true // this ensures the uniqueness of username  
-    },
+    unique: true,
+  },
   passwordHash: String,
   isAdmin: {
     type: Boolean,
     default: false,
   },
+  passwordResetToken: String,
+  passwordResetExpires: Date,
 },
-{ timestamps: true }
-)
+{ timestamps: true })
 
 userSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
-    // the passwordHash should not be revealed
     delete returnedObject.passwordHash
+    delete returnedObject.passwordResetToken
+    delete returnedObject.passwordResetExpires
   }
 })
 

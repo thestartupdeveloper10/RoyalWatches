@@ -1,38 +1,22 @@
-import {
-    Card,
-    CardContent,
-    CardFooter,
-  } from "@/components/ui/card"
-  import { Skeleton } from "@/components/ui/skeleton";
 export default function CardTemp_Skeleton() {
   return (
-    <div>
-        <Card>
-                
-                <div className="mb-4 bg-[#f7f8f2] relative">
-                <svg
-                className="w-full h-50 text-gray-200 dark:text-gray-600"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 18"
-                >
-                <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
-                </svg> 
-                </div>
-               
-                <CardFooter className='-mb-3'>
-                <Skeleton className="w-[30%] mb-4 bg-slate-200 h-5"/>
-                </CardFooter>
-                <CardContent >
-                    <Skeleton className="w-full mb-2 h-5"/>
-                <Skeleton className="w-[70%] mb-2  h-5"/>
-                <Skeleton className="w-[20%] h-5"/>
-                </CardContent>
-                <CardFooter className='flex justify-between' >
-                <Skeleton className="w-[20%] h-5"/>
-                </CardFooter>
-                </Card>
+    <div
+      className="flex flex-col overflow-hidden"
+      style={{
+        backgroundColor: 'var(--rw-surface)',
+        border: '1px solid var(--rw-border)',
+        borderRadius: '1rem',
+      }}
+    >
+      <div className="animate-pulse" style={{ aspectRatio: '4/5', backgroundColor: 'var(--rw-elevated)' }} />
+      <div className="p-4 flex flex-col gap-3">
+        <div className="h-5 rounded animate-pulse" style={{ backgroundColor: 'var(--rw-elevated)', width: '72%' }} />
+        <div className="h-3 rounded animate-pulse" style={{ backgroundColor: 'var(--rw-elevated)', width: '50%' }} />
+        <div className="flex justify-between mt-1">
+          <div className="h-4 rounded animate-pulse" style={{ backgroundColor: 'var(--rw-elevated)', width: '28%' }} />
+          <div className="h-7 rounded animate-pulse" style={{ backgroundColor: 'var(--rw-elevated)', width: '22%' }} />
+        </div>
+      </div>
     </div>
-  )
+  );
 }

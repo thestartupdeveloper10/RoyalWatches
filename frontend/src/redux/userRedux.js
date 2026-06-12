@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentUser: null,
-  userId: null, // Added userId to store the current user's identifier
+  userId: null,
   isFetching: false,
-  error: false,
+  error: null,
 };
 
 const userSlice = createSlice({
@@ -13,35 +13,39 @@ const userSlice = createSlice({
   reducers: {
     loginStart: (state) => {
       state.isFetching = true;
-      state.error = false;
+      state.error = null;
     },
     loginSuccess: (state, action) => {
       state.isFetching = false;
       state.currentUser = action.payload;
-      state.userId = action.payload.id; // Assuming userId is part of the login payload
+      state.userId = action.payload.id;
+      state.error = null;
     },
-    loginFailure: (state) => {
+    loginFailure: (state, action) => {
       state.isFetching = false;
-      state.error = true;
+      state.error = action.payload || "Login failed. Please try again.";
     },
     resetError: (state) => {
-      state.error = false;
+      state.error = null;
     },
     logout: (state) => {
       state.currentUser = null;
       state.userId = null;
+      state.error = null;
     },
     registerStart: (state) => {
       state.isFetching = true;
+      state.error = null;
     },
     registerSuccess: (state, action) => {
       state.isFetching = false;
       state.currentUser = action.payload;
-      state.userId = action.payload.id; // Assuming userId is part of the registration payload
+      state.userId = action.payload.id;
+      state.error = null;
     },
-    registerFailure: (state) => {
+    registerFailure: (state, action) => {
       state.isFetching = false;
-      state.error = true;
+      state.error = action.payload || "Registration failed. Please try again.";
     },
   },
 });

@@ -1,87 +1,69 @@
 const Product = require("../models/product");
-const {
-  verifyToken,
-  verifyTokenAndAuthorization,
-  verifyTokenAndAdmin,
-} = require("./verifyToken");
+const { verifyTokenAndAdmin } = require("./verifyToken");
 
 const productRouter = require("express").Router();
 
-//CREATE
-
-productRouter.post("/", verifyTokenAndAdmin, async (req, res) => {
+productRouter.post("/", verifyTokenAndAdmin, async (req, res, next) => {
   const newProduct = new Product(req.body);
-
   try {
     const savedProduct = await newProduct.save();
-    res.status(200).json(savedProduct);
+    res.status(201).json(savedProduct);
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
-//UPDATE
-
-productRouter.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+productRouter.put("/:id", verifyTokenAndAdmin, async (req, res, next) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
-      {
-        $set: req.body,
-      },
+      { $set: req.body },
       { new: true }
     );
     res.status(200).json(updatedProduct);
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
-//DELETE
-
-productRouter.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+productRouter.delete("/:id", verifyTokenAndAdmin, async (req, res, next) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.status(200).json("Product has been deleted...");
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
-//GET PRODUCT
-
-productRouter.get("/find/:id", async (req, res) => {
+productRouter.get("/find/:id", async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ error: 'Product not found' });
     res.status(200).json(product);
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
-//GET ALL PRODUCTS
-
-productRouter.get("/", async (req, res) => {
+productRouter.get("/", async (req, res, next) => {
   const qNew = req.query.new;
   const qCategory = req.query.category;
+  const page = Math.max(1, parseInt(req.query.page) || 1);
+  const limit = Math.min(100, parseInt(req.query.limit) || 20);
+  const skip = (page - 1) * limit;
+
   try {
     let products;
-
     if (qNew) {
       products = await Product.find().sort({ createdAt: -1 }).limit(5);
     } else if (qCategory) {
-      products = await Product.find({
-        categories: {
-          $in: [qCategory],
-        },
-      });
+      products = await Product.find({ categories: { $in: [qCategory] } }).skip(skip).limit(limit);
     } else {
-      products = await Product.find();
+      products = await Product.find().skip(skip).limit(limit);
     }
-
     res.status(200).json(products);
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 

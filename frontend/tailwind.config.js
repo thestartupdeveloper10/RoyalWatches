@@ -12,12 +12,24 @@ module.exports = {
     container: {
       center: true,
       padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
+      screens: { "2xl": "1400px" },
     },
     extend: {
+      fontFamily: {
+        display: ["'Cormorant Garamond'", "Georgia", "serif"],
+        sans: ["'Outfit'", "system-ui", "sans-serif"],
+        serif: ["'Cormorant Garamond'", "Georgia", "serif"],
+      },
       colors: {
+        /* RoyalWatches design tokens */
+        "rw-bg": "var(--rw-bg)",
+        "rw-surface": "var(--rw-surface)",
+        "rw-elevated": "var(--rw-elevated)",
+        "rw-text": "var(--rw-text)",
+        "rw-muted": "var(--rw-muted)",
+        "rw-gold": "var(--rw-gold)",
+        "rw-border": "var(--rw-border)",
+        /* shadcn tokens */
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -66,10 +78,19 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-up": "fade-up 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards",
+      },
+      transitionTimingFunction: {
+        luxury: "cubic-bezier(0.23, 1, 0.32, 1)",
+        "in-out-luxury": "cubic-bezier(0.77, 0, 0.175, 1)",
       },
     },
   },

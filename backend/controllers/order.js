@@ -1,122 +1,141 @@
 const Order = require("../models/order");
-const {
-  verifyToken,
-  verifyTokenAndAuthorization,
-  verifyTokenAndAdmin,
-} = require("./verifyToken");
+const Product = require("../models/product");
+const User = require("../models/user");
+const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("./verifyToken");
+const { sendOrderConfirmation, sendShippingNotification } = require("../utils/email");
+const logger = require("../utils/logger");
 
 const orderRouter = require("express").Router();
 
-//CREATE
+orderRouter.post("/", verifyToken, async (req, res, next) => {
+  const { products, amount, address } = req.body;
 
-orderRouter.post("/", verifyToken, async (req, res) => {
-  const newOrder = new Order(req.body);
-
+  // Atomically decrement stock for each product, tracking what's decremented for rollback
+  const decremented = [];
   try {
+    for (const item of products) {
+      const updated = await Product.findOneAndUpdate(
+        { _id: item.productId, stock: { $gte: item.quantity } },
+        { $inc: { stock: -item.quantity } },
+        { new: true }
+      );
+      if (!updated) {
+        await Promise.all(
+          decremented.map(d => Product.findByIdAndUpdate(d.productId, { $inc: { stock: d.quantity } }))
+        );
+        return res.status(400).json({ error: `Insufficient stock for product ${item.productId}` });
+      }
+      decremented.push({ productId: item.productId, quantity: item.quantity });
+    }
+
+    const newOrder = new Order({ userId: req.user.id, products, amount, address });
     const savedOrder = await newOrder.save();
-    res.status(200).json(savedOrder);
+
+    // Send confirmation email — failure is logged but does not fail the request
+    User.findById(req.user.id).select('email').then(user => {
+      if (user?.email) {
+        sendOrderConfirmation(user.email, savedOrder).catch(err =>
+          logger.error('Order confirmation email failed:', err.message)
+        );
+      }
+    });
+
+    res.status(201).json(savedOrder);
   } catch (err) {
-    res.status(500).json(err);
+    await Promise.all(
+      decremented.map(d => Product.findByIdAndUpdate(d.productId, { $inc: { stock: d.quantity } }))
+    );
+    next(err);
   }
 });
 
-//UPDATE
-
-orderRouter.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+orderRouter.put("/:id", verifyTokenAndAdmin, async (req, res, next) => {
+  const { status } = req.body;
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
-      {
-        $set: req.body,
-      },
+      { $set: { status } },
       { new: true }
     );
+    if (!updatedOrder) return res.status(404).json({ error: 'Order not found' });
+
+    if (status === 'shipped') {
+      User.findById(updatedOrder.userId).select('email').then(user => {
+        if (user?.email) {
+          sendShippingNotification(user.email, updatedOrder).catch(err =>
+            logger.error('Shipping notification email failed:', err.message)
+          );
+        }
+      });
+    }
+
     res.status(200).json(updatedOrder);
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
-//DELETE
-
-orderRouter.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+orderRouter.delete("/:id", verifyTokenAndAdmin, async (req, res, next) => {
   try {
     await Order.findByIdAndDelete(req.params.id);
     res.status(200).json("Order has been deleted...");
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
-//GET USER ORDERS
-
-orderRouter.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
-  try {
-    const orders = await Order.find({ userId: req.params.userId });
-    res.status(200).json(orders);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// //GET ALL
-
-orderRouter.get("/", verifyTokenAndAdmin, async (req, res) => {
-  try {
-    const orders = await Order.find();
-    res.status(200).json(orders);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// GET MONTHLY INCOME
-
-orderRouter.get("/income", verifyTokenAndAdmin, async (req, res) => {
+// Static routes before /:id to prevent route shadowing
+orderRouter.get("/income", verifyTokenAndAdmin, async (req, res, next) => {
   const productId = req.query.pid;
-  const date = new Date();
-  const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
-  const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
+  const now = new Date();
+  const previousMonth = new Date(now.getFullYear(), now.getMonth() - 2, 1);
 
   try {
     const income = await Order.aggregate([
       {
         $match: {
           createdAt: { $gte: previousMonth },
-          ...(productId && {
-            products: { $elemMatch: { productId } },
-          }),
+          ...(productId && { products: { $elemMatch: { productId } } }),
         },
       },
-      {
-        $project: {
-          month: { $month: "$createdAt" },
-          sales: "$amount",
-        },
-      },
-      {
-        $group: {
-          _id: "$month",
-          total: { $sum: "$sales" },
-        },
-      },
+      { $project: { month: { $month: "$createdAt" }, sales: "$amount" } },
+      { $group: { _id: "$month", total: { $sum: "$sales" } } },
     ]);
     res.status(200).json(income);
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
-// //GET ALL
-
-orderRouter.get("/stats", verifyTokenAndAdmin, async (req, res) => {
+orderRouter.get("/stats", verifyTokenAndAdmin, async (req, res, next) => {
   try {
-    const orders = await Order.find().count();
+    const count = await Order.countDocuments();
+    res.status(200).json(count);
+  } catch (err) {
+    next(err);
+  }
+});
+
+orderRouter.get("/find/:userId", verifyTokenAndAuthorization, async (req, res, next) => {
+  try {
+    const orders = await Order.find({ userId: req.params.userId });
     res.status(200).json(orders);
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
+orderRouter.get("/", verifyTokenAndAdmin, async (req, res, next) => {
+  const page = Math.max(1, parseInt(req.query.page) || 1);
+  const limit = Math.min(100, parseInt(req.query.limit) || 20);
+  const skip = (page - 1) * limit;
+
+  try {
+    const orders = await Order.find().sort({ createdAt: -1 }).skip(skip).limit(limit);
+    res.status(200).json(orders);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = orderRouter;

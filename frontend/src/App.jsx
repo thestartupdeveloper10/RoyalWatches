@@ -1,75 +1,74 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { lazy, Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import './App.css';
-import Cart from './component/pages/Cart';
-import Hero from './component/pages/Hero';
-import Product from './component/pages/Product';
-import Product_List from './component/pages/Product_List';
-import MenHero from './component/pages/MenHero';
-import Login from './component/pages/Login';
-import SignUp from './component/pages/SignUp';
-import WomenHero from './component/pages/WomenHero';
-import NotFound from './component/pages/NotFound';
-import SingleBlog from './component/pages/SingleBlog';
-import Contact from './component/pages/Contact';
-import Wishlist from './component/pages/Wishlist';
-import UserProfile from './component/pages/UserProfile';
-import ProtectedRoute from './ProtectedRoute';
-import ScrollToTop from './ScrollToTop';
-import Features from './component/pages/Features';
-import About from './component/pages/About';
-import Instructions from './component/pages/Instructions';
-import TermsAndConditions from './component/pages/TermsAndConditions';
-import DeliveryDetails from './component/pages/DeliveryDetails';
+import "./App.css";
+import ProtectedRoute from "./ProtectedRoute";
+import ScrollToTop from "./ScrollToTop";
+import ErrorBoundary from "./component/ErrorBoundary";
+
+const Hero = lazy(() => import("./component/pages/Hero"));
+const Product_List = lazy(() => import("./component/pages/Product_List"));
+const Product = lazy(() => import("./component/pages/Product"));
+const Cart = lazy(() => import("./component/pages/Cart"));
+const Wishlist = lazy(() => import("./component/pages/Wishlist"));
+const UserProfile = lazy(() => import("./component/pages/UserProfile"));
+const MenHero = lazy(() => import("./component/pages/MenHero"));
+const WomenHero = lazy(() => import("./component/pages/WomenHero"));
+const Login = lazy(() => import("./component/pages/Login"));
+const SignUp = lazy(() => import("./component/pages/SignUp"));
+const SingleBlog = lazy(() => import("./component/pages/SingleBlog"));
+const Contact = lazy(() => import("./component/pages/Contact"));
+const Features = lazy(() => import("./component/pages/Features"));
+const About = lazy(() => import("./component/pages/About"));
+const Instructions = lazy(() => import("./component/pages/Instructions"));
+const TermsAndConditions = lazy(() => import("./component/pages/TermsAndConditions"));
+const DeliveryDetails = lazy(() => import("./component/pages/DeliveryDetails"));
+const NotFound = lazy(() => import("./component/pages/NotFound"));
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
 
-
   return (
-    <>
+    <ErrorBoundary>
       <Router>
-        <ScrollToTop/>
-        <Routes>
-          <Route path='/' element={<Hero/>}></Route>
-          <Route path='/products' element={<Product_List/>}></Route>
-          <Route path='/products/:category' element={<Product_List/>}></Route>
-          <Route path='/product/:id' element={<Product/>}></Route>
-          <Route path='/blogs' element={<SingleBlog/>}></Route>
-          <Route path='/features' element={<Features/>}></Route>
-          <Route path='/about' element={<About/>}></Route>
-          <Route path='/instructions' element={<Instructions/>}></Route>
-          <Route path='/terms' element={<TermsAndConditions/>}></Route>
-          <Route path='/delivery' element={<DeliveryDetails/>}></Route>
-          <Route 
-            path='/cart' 
-            element={
-              <ProtectedRoute>
-                <Cart />
-              </ProtectedRoute>
-            }
-          ></Route>
-          <Route 
-            path='/wishlist' 
-            element={
-              <ProtectedRoute>
-                <Wishlist />
-              </ProtectedRoute>
-            }
-          ></Route>
-          <Route path='/Men' element={<MenHero/>}></Route>
-          <Route path='/Women' element={<WomenHero/>}></Route>
-          <Route path='/contact' element={<Contact/>}></Route>
-          <Route path='/userprofile' element={<UserProfile/>}></Route>
-          <Route 
-            path='/login' 
-            element={user ? (<Navigate replace to="/" />) : (<Login />)}
-          ></Route>
-          <Route path='/signup' element={<SignUp/>}></Route>
-          <Route path='*' element={<NotFound />}/>
-        </Routes>
+        <ScrollToTop />
+        <Suspense fallback={<div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: 'var(--rw-bg)' }}><div className="rw-spinner" /></div>}>
+          <Routes>
+            <Route path="/" element={<Hero />} />
+            <Route path="/products" element={<Product_List />} />
+            <Route path="/products/:category" element={<Product_List />} />
+            <Route path="/product/:id" element={<Product />} />
+            <Route path="/blogs" element={<SingleBlog />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/instructions" element={<Instructions />} />
+            <Route path="/terms" element={<TermsAndConditions />} />
+            <Route path="/delivery" element={<DeliveryDetails />} />
+            <Route path="/Men" element={<MenHero />} />
+            <Route path="/Women" element={<WomenHero />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route
+              path="/cart"
+              element={<ProtectedRoute><Cart /></ProtectedRoute>}
+            />
+            <Route
+              path="/wishlist"
+              element={<ProtectedRoute><Wishlist /></ProtectedRoute>}
+            />
+            <Route
+              path="/userprofile"
+              element={<ProtectedRoute><UserProfile /></ProtectedRoute>}
+            />
+            <Route
+              path="/login"
+              element={user ? <Navigate replace to="/" /> : <Login />}
+            />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </Router>
-    </>
+    </ErrorBoundary>
   );
 }
 

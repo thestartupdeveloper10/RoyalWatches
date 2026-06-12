@@ -1,72 +1,75 @@
 const Cart = require("../models/cart");
-const {
-  verifyToken,
-  verifyTokenAndAuthorization,
-  verifyTokenAndAdmin,
-} = require("./verifyToken");
+const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("./verifyToken");
 
 const cartRouter = require("express").Router();
 
-//CREATE
-
-cartRouter.post("/", verifyToken, async (req, res) => {
+cartRouter.post("/", verifyToken, async (req, res, next) => {
   const newCart = new Cart(req.body);
-
   try {
     const savedCart = await newCart.save();
-    res.status(200).json(savedCart);
+    res.status(201).json(savedCart);
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
-//UPDATE
-
-cartRouter.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
+// Uses verifyToken + inline ownership check because req.params.id is the cart ID,
+// not the user ID — verifyTokenAndAuthorization would always fail for non-admins here
+cartRouter.put("/:id", verifyToken, async (req, res, next) => {
   try {
+    const cart = await Cart.findById(req.params.id);
+    if (!cart) return res.status(404).json({ error: 'Cart not found' });
+
+    if (cart.userId.toString() !== req.user.id && !req.user.isAdmin) {
+      return res.status(403).json("You are not allowed to do that!");
+    }
+
     const updatedCart = await Cart.findByIdAndUpdate(
       req.params.id,
-      {
-        $set: req.body,
-      },
+      { $set: { products: req.body.products } },
       { new: true }
     );
     res.status(200).json(updatedCart);
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
-//DELETE
-
-cartRouter.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
+cartRouter.delete("/:id", verifyToken, async (req, res, next) => {
   try {
+    const cart = await Cart.findById(req.params.id);
+    if (!cart) return res.status(404).json({ error: 'Cart not found' });
+
+    if (cart.userId.toString() !== req.user.id && !req.user.isAdmin) {
+      return res.status(403).json("You are not allowed to do that!");
+    }
+
     await Cart.findByIdAndDelete(req.params.id);
     res.status(200).json("Cart has been deleted...");
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
-//GET USER CART
-
-cartRouter.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
+cartRouter.get("/find/:userId", verifyTokenAndAuthorization, async (req, res, next) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId });
     res.status(200).json(cart);
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
-// //GET ALL
+cartRouter.get("/", verifyTokenAndAdmin, async (req, res, next) => {
+  const page = Math.max(1, parseInt(req.query.page) || 1);
+  const limit = Math.min(100, parseInt(req.query.limit) || 20);
+  const skip = (page - 1) * limit;
 
-cartRouter.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
-    const carts = await Cart.find();
+    const carts = await Cart.find().skip(skip).limit(limit);
     res.status(200).json(carts);
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 
