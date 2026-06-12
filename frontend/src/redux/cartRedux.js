@@ -54,10 +54,38 @@ const cartSlice = createSlice({
         }
       }
     },
+    mergeGuestCart: (state, action) => {
+      const { userId } = action.payload;
+      const guestCart = state.carts['null'];
+      if (!guestCart || guestCart.products.length === 0) return;
+      if (!state.carts[userId]) {
+        state.carts[userId] = { products: [], quantity: 0, total: 0 };
+      }
+      for (const guestProduct of guestCart.products) {
+        const existingIndex = state.carts[userId].products.findIndex(
+          (p) => p._id === guestProduct._id
+        );
+        if (existingIndex !== -1) {
+          state.carts[userId].products[existingIndex].quantity += guestProduct.quantity;
+          state.carts[userId].total += guestProduct.price * guestProduct.quantity;
+        } else {
+          state.carts[userId].products.push(guestProduct);
+          state.carts[userId].quantity += 1;
+          state.carts[userId].total += guestProduct.price * guestProduct.quantity;
+        }
+      }
+      delete state.carts['null'];
+    },
+    clearCart: (state, action) => {
+      const { userId } = action.payload;
+      if (state.carts[userId]) {
+        state.carts[userId] = { products: [], quantity: 0, total: 0 };
+      }
+    },
   },
 });
 
-export const { addProduct, removeProduct, updateProductQuantity } = cartSlice.actions;
+export const { addProduct, removeProduct, updateProductQuantity, mergeGuestCart, clearCart } = cartSlice.actions;
 
 export const selectCartItems = (state, userId) =>
   state.cart.carts[userId] || { products: [], quantity: 0, total: 0 };

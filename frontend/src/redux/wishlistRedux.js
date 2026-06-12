@@ -35,10 +35,28 @@ const wishlistSlice = createSlice({
         }
       }
     },
+    mergeGuestWishlist: (state, action) => {
+      const { userId } = action.payload;
+      const guestWishlist = state.wishlists['null'];
+      if (!guestWishlist || guestWishlist.products.length === 0) return;
+      if (!state.wishlists[userId]) {
+        state.wishlists[userId] = { products: [], wishQuantity: 0 };
+      }
+      for (const guestProduct of guestWishlist.products) {
+        const exists = state.wishlists[userId].products.some(
+          (p) => p._id === guestProduct._id
+        );
+        if (!exists) {
+          state.wishlists[userId].products.push(guestProduct);
+          state.wishlists[userId].wishQuantity += 1;
+        }
+      }
+      delete state.wishlists['null'];
+    },
   },
 });
 
-export const { addProductWishlist, removeProductWishlist } = wishlistSlice.actions;
+export const { addProductWishlist, removeProductWishlist, mergeGuestWishlist } = wishlistSlice.actions;
 
 export const selectWishlistItems = (state, userId) =>
   state.wishlist.wishlists[userId] || { products: [], wishQuantity: 0 };

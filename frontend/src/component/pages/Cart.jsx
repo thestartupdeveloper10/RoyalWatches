@@ -1,11 +1,13 @@
 import NavBar from "../NavBar";
 import Footer from "../Footer";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { removeProduct, updateProductQuantity, selectCartItems } from "../../redux/cartRedux";
 import { selectWishlistItems } from "@/redux/wishlistRedux";
 import { motion, AnimatePresence } from "framer-motion";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
+import CheckoutModal from "../CheckoutModal";
 
 const SHIPPING_FEE = 100;
 const DISCOUNT_THRESHOLD = 100000;
@@ -16,6 +18,7 @@ const Cart = () => {
   const cart = useSelector((state) => selectCartItems(state, userId));
   const wishlist = useSelector((state) => selectWishlistItems(state, userId));
   const dispatch = useDispatch();
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
 
   const subtotal = cart.total;
   const discount = subtotal > DISCOUNT_THRESHOLD ? subtotal * DISCOUNT_RATE : 0;
@@ -35,9 +38,7 @@ const Cart = () => {
     dispatch(removeProduct({ userId, productId }));
   };
 
-  const handleCheckout = () => {
-    alert("Checkout coming soon! Your cart is saved.");
-  };
+  const handleCheckout = () => setCheckoutOpen(true);
 
   if (cart.products.length === 0) {
     return (
@@ -454,6 +455,7 @@ const Cart = () => {
       </div>
 
       <Footer />
+      <CheckoutModal isOpen={checkoutOpen} onClose={() => setCheckoutOpen(false)} />
     </div>
   );
 };

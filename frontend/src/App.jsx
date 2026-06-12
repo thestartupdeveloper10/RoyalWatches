@@ -1,10 +1,11 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./App.css";
 import ProtectedRoute from "./ProtectedRoute";
 import ScrollToTop from "./ScrollToTop";
 import ErrorBoundary from "./component/ErrorBoundary";
+import { AuthPromptProvider } from "./context/AuthPromptContext";
 
 const Hero = lazy(() => import("./component/pages/Hero"));
 const Product_List = lazy(() => import("./component/pages/Product_List"));
@@ -25,48 +26,54 @@ const TermsAndConditions = lazy(() => import("./component/pages/TermsAndConditio
 const DeliveryDetails = lazy(() => import("./component/pages/DeliveryDetails"));
 const NotFound = lazy(() => import("./component/pages/NotFound"));
 
-function App() {
+// Reads ?redirect= param after login so users land back where they came from
+const LoginRoute = () => {
   const user = useSelector((state) => state.user.currentUser);
+  const location = useLocation();
+  const redirect = new URLSearchParams(location.search).get("redirect") || "/";
+  if (user) return <Navigate replace to={redirect} />;
+  return <Login />;
+};
 
+function App() {
   return (
     <ErrorBoundary>
       <Router>
-        <ScrollToTop />
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: 'var(--rw-bg)' }}><div className="rw-spinner" /></div>}>
-          <Routes>
-            <Route path="/" element={<Hero />} />
-            <Route path="/products" element={<Product_List />} />
-            <Route path="/products/:category" element={<Product_List />} />
-            <Route path="/product/:id" element={<Product />} />
-            <Route path="/blogs" element={<SingleBlog />} />
-            <Route path="/features" element={<Features />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/instructions" element={<Instructions />} />
-            <Route path="/terms" element={<TermsAndConditions />} />
-            <Route path="/delivery" element={<DeliveryDetails />} />
-            <Route path="/Men" element={<MenHero />} />
-            <Route path="/Women" element={<WomenHero />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route
-              path="/cart"
-              element={<ProtectedRoute><Cart /></ProtectedRoute>}
-            />
-            <Route
-              path="/wishlist"
-              element={<ProtectedRoute><Wishlist /></ProtectedRoute>}
-            />
-            <Route
-              path="/userprofile"
-              element={<ProtectedRoute><UserProfile /></ProtectedRoute>}
-            />
-            <Route
-              path="/login"
-              element={user ? <Navigate replace to="/" /> : <Login />}
-            />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+        <AuthPromptProvider>
+          <ScrollToTop />
+          <Suspense fallback={<div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: 'var(--rw-bg)' }}><div className="rw-spinner" /></div>}>
+            <Routes>
+              <Route path="/" element={<Hero />} />
+              <Route path="/products" element={<Product_List />} />
+              <Route path="/products/:category" element={<Product_List />} />
+              <Route path="/product/:id" element={<Product />} />
+              <Route path="/blogs" element={<SingleBlog />} />
+              <Route path="/features" element={<Features />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/instructions" element={<Instructions />} />
+              <Route path="/terms" element={<TermsAndConditions />} />
+              <Route path="/delivery" element={<DeliveryDetails />} />
+              <Route path="/Men" element={<MenHero />} />
+              <Route path="/Women" element={<WomenHero />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route
+                path="/cart"
+                element={<ProtectedRoute><Cart /></ProtectedRoute>}
+              />
+              <Route
+                path="/wishlist"
+                element={<ProtectedRoute><Wishlist /></ProtectedRoute>}
+              />
+              <Route
+                path="/userprofile"
+                element={<ProtectedRoute><UserProfile /></ProtectedRoute>}
+              />
+              <Route path="/login" element={<LoginRoute />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </AuthPromptProvider>
       </Router>
     </ErrorBoundary>
   );

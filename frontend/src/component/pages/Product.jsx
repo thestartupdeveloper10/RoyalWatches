@@ -5,7 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { publicRequest } from "../../service/requestMethods";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../redux/cartRedux";
-import { addProductWishlist, selectWishlistItems } from "@/redux/wishlistRedux";
+import { addProductWishlist, removeProductWishlist, selectWishlistItems } from "@/redux/wishlistRedux";
+import { useAuthAction } from "../../context/AuthPromptContext";
 import Product_Skeleton from "../Product_Skeleton";
 import SimilarProducts from "../SimilarProducts";
 import { motion, AnimatePresence } from "framer-motion";
@@ -24,6 +25,7 @@ const Product = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.userId);
   const wishlist = useSelector((state) => selectWishlistItems(state, userId));
+  const { requireAuth } = useAuthAction();
 
   const isFavorite = wishlist?.products?.some((p) => p._id === product._id);
 
@@ -53,13 +55,21 @@ const Product = () => {
 
   const handleClick = () => {
     if (cartState === "added") return;
-    dispatch(addProduct({ userId, ...product, quantity, color: selectedColor, size }));
-    setCartState("added");
-    setTimeout(() => setCartState("idle"), 2200);
+    requireAuth(() => {
+      dispatch(addProduct({ userId, ...product, quantity, color: selectedColor, size }));
+      setCartState("added");
+      setTimeout(() => setCartState("idle"), 2200);
+    });
   };
 
   const handleWishlist = () => {
-    dispatch(addProductWishlist({ userId, ...product }));
+    requireAuth(() => {
+      if (isFavorite) {
+        dispatch(removeProductWishlist({ userId, productId: product._id }));
+      } else {
+        dispatch(addProductWishlist({ userId, ...product }));
+      }
+    });
   };
 
   const imgSrc = product.images?.[0] || product.img;

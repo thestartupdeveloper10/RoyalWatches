@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Plus, Check } from 'lucide-react';
 import { addProduct } from '../redux/cartRedux';
-import { addProductWishlist, selectWishlistItems } from '@/redux/wishlistRedux';
+import { addProductWishlist, removeProductWishlist, selectWishlistItems } from '@/redux/wishlistRedux';
+import { useAuthAction } from '../context/AuthPromptContext';
 
 const MenProduct = ({ product }) => {
   const dispatch = useDispatch();
@@ -13,21 +14,30 @@ const MenProduct = ({ product }) => {
   const wishlist = useSelector(state => selectWishlistItems(state, userId));
   const [cartState, setCartState] = useState('idle');
   const [hovered, setHovered] = useState(false);
+  const { requireAuth } = useAuthAction();
 
   const isFavorite = wishlist.products.some(p => p._id === product._id);
   const imgSrc = product.images?.[0] || product.img;
 
   const handleWishlist = e => {
     e.preventDefault();
-    dispatch(addProductWishlist({ userId, ...product }));
+    requireAuth(() => {
+      if (isFavorite) {
+        dispatch(removeProductWishlist({ userId, productId: product._id }));
+      } else {
+        dispatch(addProductWishlist({ userId, ...product }));
+      }
+    });
   };
 
   const handleAddToCart = e => {
     e.preventDefault();
     if (cartState === 'added') return;
-    dispatch(addProduct({ userId, ...product, quantity: 1, color: product.color?.[0], size: product.size?.[0] }));
-    setCartState('added');
-    setTimeout(() => setCartState('idle'), 2200);
+    requireAuth(() => {
+      dispatch(addProduct({ userId, ...product, quantity: 1, color: product.color?.[0], size: product.size?.[0] }));
+      setCartState('added');
+      setTimeout(() => setCartState('idle'), 2200);
+    });
   };
 
   return (
@@ -60,6 +70,7 @@ const MenProduct = ({ product }) => {
         />
         <motion.button
           onClick={handleWishlist}
+          aria-label={isFavorite ? 'Remove from wishlist' : 'Add to wishlist'}
           className="absolute top-3 right-3 flex items-center justify-center"
           style={{
             width: '2rem', height: '2rem', borderRadius: '50%',

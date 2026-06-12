@@ -120,26 +120,24 @@ const NavBar = () => {
                 )}
               </Link>
 
+              <Link to="/wishlist" className="rw-icon-btn relative" aria-label="Wishlist">
+                <Heart className="w-[15px] h-[15px]" />
+                {wishQuantity > 0 && <span className="rw-badge">{wishQuantity}</span>}
+              </Link>
+
+              <Link to="/cart" className="rw-icon-btn relative" aria-label="Cart">
+                <ShoppingBag className="w-[15px] h-[15px]" />
+                {quantity > 0 && <span className="rw-badge">{quantity}</span>}
+              </Link>
+
               {user && (
-                <>
-                  <Link to="/wishlist" className="rw-icon-btn relative" aria-label="Wishlist">
-                    <Heart className="w-[15px] h-[15px]" />
-                    {wishQuantity > 0 && <span className="rw-badge">{wishQuantity}</span>}
-                  </Link>
-
-                  <Link to="/cart" className="rw-icon-btn relative" aria-label="Cart">
-                    <ShoppingBag className="w-[15px] h-[15px]" />
-                    {quantity > 0 && <span className="rw-badge">{quantity}</span>}
-                  </Link>
-
-                  <button
-                    onClick={() => dispatch(logout())}
-                    className="rw-icon-btn hidden md:flex"
-                    aria-label="Log out"
-                  >
-                    <LogOut className="w-[15px] h-[15px]" />
-                  </button>
-                </>
+                <button
+                  onClick={() => dispatch(logout())}
+                  className="rw-icon-btn hidden md:flex"
+                  aria-label="Log out"
+                >
+                  <LogOut className="w-[15px] h-[15px]" />
+                </button>
               )}
 
               {/* Mobile hamburger */}

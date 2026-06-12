@@ -6,27 +6,37 @@ import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Check, Plus, ArrowRight } from 'lucide-react';
 import { addProduct } from '../redux/cartRedux';
-import { addProductWishlist, selectWishlistItems } from '@/redux/wishlistRedux';
+import { addProductWishlist, removeProductWishlist, selectWishlistItems } from '@/redux/wishlistRedux';
+import { useAuthAction } from '../context/AuthPromptContext';
 
 function ProductCard({ product, index, wishlistIds }) {
   const [cartState, setCartState] = useState('idle');
   const [hovered, setHovered] = useState(false);
   const dispatch = useDispatch();
   const userId = useSelector(state => state.user.userId);
+  const { requireAuth } = useAuthAction();
   const isFavorite = wishlistIds.has(product._id);
   const imgSrc = product.images?.[0] || product.img;
 
   const handleAddToCart = e => {
     e.preventDefault();
     if (cartState === 'added') return;
-    dispatch(addProduct({ userId, ...product, quantity: 1, color: product.color?.[0], size: product.size?.[0] }));
-    setCartState('added');
-    setTimeout(() => setCartState('idle'), 2200);
+    requireAuth(() => {
+      dispatch(addProduct({ userId, ...product, quantity: 1, color: product.color?.[0], size: product.size?.[0] }));
+      setCartState('added');
+      setTimeout(() => setCartState('idle'), 2200);
+    });
   };
 
   const handleWishlist = e => {
     e.preventDefault();
-    dispatch(addProductWishlist({ userId, ...product }));
+    requireAuth(() => {
+      if (isFavorite) {
+        dispatch(removeProductWishlist({ userId, productId: product._id }));
+      } else {
+        dispatch(addProductWishlist({ userId, ...product }));
+      }
+    });
   };
 
   return (
@@ -65,6 +75,7 @@ function ProductCard({ product, index, wishlistIds }) {
         {/* Wishlist button */}
         <motion.button
           onClick={handleWishlist}
+          aria-label={isFavorite ? 'Remove from wishlist' : 'Add to wishlist'}
           className="absolute top-3 right-3 flex items-center justify-center"
           style={{
             width: '2rem',
